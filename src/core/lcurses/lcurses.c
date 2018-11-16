@@ -74,6 +74,13 @@ Notes:
 # error Please upgrade to PDCurses 3.1 or later
 #endif
 
+#if defined(_WIN32)
+#   define __export         __declspec(dllexport)
+#elif defined(__GNUC__) && ((__GNUC__ >= 4) || (__GNUC__ == 3 && __GNUC_MINOR__ >= 3))
+#   define __export         __attribute__((visibility("default")))
+#else
+#   define __export         
+#endif
 
 /*
  * Title: curses
@@ -86,10 +93,10 @@ Notes:
 ** defines
 ** =======================================================
 */
-static const char *STDSCR_REGISTRY     = "cui:curses:stdscr";
-static const char *WINDOWMETA          = "cui:curses:window";
-static const char *CHSTRMETA           = "cui:curses:chstr";
-static const char *RIPOFF_TABLE        = "cui:curses:ripoffline";
+static const char *STDSCR_REGISTRY     = "ltui:curses:stdscr";
+static const char *WINDOWMETA          = "ltui:curses:window";
+static const char *CHSTRMETA           = "ltui:curses:chstr";
+static const char *RIPOFF_TABLE        = "ltui:curses:ripoffline";
 
 #define B(v) ((v == ERR) ? 0 : 1)
 
@@ -2306,8 +2313,7 @@ static const luaL_Reg curseslib[] =
     {NULL, NULL}
 };
 
-
-int xm_curses_register (lua_State *L)
+__export int luaopen_ltui_curses (lua_State *L)
 {
     /*
     ** create new metatable for window objects
