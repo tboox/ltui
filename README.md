@@ -37,15 +37,15 @@ LTUI is a cross-platform terminal ui library based on Lua.
 
 #### menuconf
 
-![](https://tboox.org/static/img/ltui/choicebox.png)
+<img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
 
 #### inputdialog
 
-![](https://tboox.org/static/img/ltui/inputdialog.png)
+<img src="https://tboox.org/static/img/ltui/inputdialog.png" width="70%" />
 
 #### textarea
 
-![](https://tboox.org/static/img/ltui/textarea.png)
+<img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
 
 If you want to known more, please refer to:
 
