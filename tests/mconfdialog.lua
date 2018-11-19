@@ -76,9 +76,7 @@ function demo:init()
     mconfdialog:load(configs)
     mconfdialog:action_set(action.ac_on_exit, function (v) self:quit() end)
     mconfdialog:action_set(action.ac_on_save, function (v) 
-        for _, config in ipairs(configs) do
-            log:print("%s", config)
-        end
+        -- TODO save configs
         mconfdialog:quit()
     end)
     self:insert(mconfdialog)

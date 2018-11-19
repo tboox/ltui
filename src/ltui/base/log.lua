@@ -47,11 +47,6 @@ function log:file()
                 dir = "."
             end
 
-            -- ensure the directory
-            if not os.isdir(dir) then
-                os.mkdir(dir) 
-            end
-
             -- open the log file
             self._FILE = io.open(outputfile, 'w+')
         end
