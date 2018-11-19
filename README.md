@@ -31,7 +31,17 @@
 
 LTUI is a cross-platform terminal ui library based on Lua. 
 
+## Build
+
+We need install the cross-platform build utility [xmake](https://github.com/tboox/xmake) first.
+
+```console
+$ xmake
+```
+
 ## Examples
+
+#### Window
 
 ```lua
 --  requires
@@ -55,6 +65,42 @@ function demo:init()
 
     -- init main window
     self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
+end
+
+-- run demo
+demo:run()
+```
+
+#### Input dialog
+
+```lua
+--  requires
+local ltui        = require("ltui")
+local label       = ltui.label
+local button      = ltui.button
+local application = ltui.application
+local event       = ltui.event
+local rect        = ltui.rect
+local inputdialog = ltui.inputdialog
+
+-- the demo application
+local demo = application()
+
+-- init demo
+function demo:init()
+
+    -- init name 
+    application.init(self, "demo")
+
+    -- init background
+    self:background_set("blue")
+
+    -- init input dialog
+    local dialog_input = inputdialog:new("dialog.input", rect {0, 0, 50, 8})
+    dialog_input:text():text_set("please input text:")
+    dialog_input:button_add("no", "< No >", function (v) dialog_input:quit() end)
+    dialog_input:button_add("yes", "< Yes >", function (v) dialog_input:quit() end)
+    self:insert(dialog_input, {centerx = true, centery = true})
 end
 
 -- run demo
