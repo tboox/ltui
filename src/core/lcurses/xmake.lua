@@ -1,8 +1,8 @@
 -- add target
 target("lcurses")
 
-    -- make as a static library
-    set_kind("static")
+    -- only make objects
+    set_kind("object")
 
     -- add deps
     if is_plat("windows") then

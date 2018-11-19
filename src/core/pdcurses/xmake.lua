@@ -1,8 +1,8 @@
 -- add target
 target("pdcurses")
 
-    -- make as a static library
-    set_kind("static")
+    -- only make objects
+    set_kind("object")
 
     -- add the common source files
     add_files("**.c") 

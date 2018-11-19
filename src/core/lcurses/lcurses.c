@@ -2352,7 +2352,6 @@ __export int luaopen_ltui_curses (lua_State *L)
     return 1;
 }
 
-
 /* initialize the character map table with the known values after
 ** curses initialization (for ACS_xxx values) */
 static void init_ascii_map()

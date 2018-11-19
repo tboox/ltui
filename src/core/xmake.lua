@@ -31,12 +31,6 @@ end
 -- add requires
 add_requires("luajit")
 
--- add projects
-includes("lcurses")
-if is_plat("windows") then
-    includes("pdcurses")
-end
-
 -- add target
 target("ltui")
 
@@ -45,3 +39,12 @@ target("ltui")
 
     -- add deps
     add_deps("lcurses")
+
+    -- set target directory
+    set_targetdir("$(buildir)")
+
+-- add projects
+includes("lcurses")
+if is_plat("windows") then
+    includes("pdcurses")
+end
