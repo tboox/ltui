@@ -112,7 +112,7 @@ demo:run()
 
 #### 菜单配置
 
-<img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
+<img src="https://tboox.org/static/img/ltui/menuconf.png" width="70%" />
 
 #### 输入框
 
