@@ -63,6 +63,14 @@ Notes:
 #include <stdlib.h>
 #include <string.h>
 
+#include "luaconf.h"
+#undef LUA_API
+#if defined(__cplusplus)
+#define LUA_API extern "C"
+#else
+#define LUA_API extern
+#endif
+
 #include "luajit.h"
 #include "lualib.h"
 #include "lauxlib.h"

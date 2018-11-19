@@ -66,7 +66,11 @@ end
 -- clear log
 function log:clear(state)
     if os.isfile(self:outputfile()) then
-        io.writefile(self:outputfile(), "")
+        local file = io.open(self:outputfile(), "w")
+        if file then
+            file:write("")
+            file:close()
+        end
     end
 end
 

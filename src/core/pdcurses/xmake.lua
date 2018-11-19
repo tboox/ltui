@@ -7,6 +7,9 @@ target("pdcurses")
     -- add the common source files
     add_files("**.c") 
 
+    -- add include directories
+    add_includedirs(".")
+
     -- add defines
     add_defines("PDC_WIDE")
 

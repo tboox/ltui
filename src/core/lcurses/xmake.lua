@@ -22,3 +22,6 @@ target("lcurses")
     else
         add_links("curses")
     end
+
+    -- set languages
+    set_languages("c89")

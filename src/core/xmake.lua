@@ -25,7 +25,7 @@ if is_plat("windows") then
     add_cxflags("-MT") 
     add_defines("_CRT_SECURE_NO_WARNINGS")
     add_shflags("-nodefaultlib:msvcrt.lib")
-    add_links("kernel32", "user32", "gdi32")
+    add_links("kernel32", "user32", "gdi32", "advapi32")
 end
 
 -- add requires

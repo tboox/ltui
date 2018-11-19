@@ -58,29 +58,32 @@ end
 
 -- run program and get io output
 function os.iorun(cmd, ...)
-    local ok = false
     local outs = nil
     local file = io.popen(string.tryformat(cmd, ...), "r")
     if file then
         outs = file:read("*a"):trim()
         file:close()
-        ok = true
     end
-    return ok, outs
+    return outs
 end
 
 -- get host name
 function os.host()
     if os._HOST == nil then
-        local ok, result = os.iorun("uname") 
-        if ok then
-            if result:lower():find("linux", 1, true) then
-                os._HOST = "linux"
-            elseif result:lower():find("darwin", 1, true) then
-                os._HOST = "macosx"
-            end
-        elseif os.run("cmd /c ver") == 0 then
+        if jit and jit.os then
+            local hosts = {OSX = "macosx", Windows = "windows", Linux = "linux"}
+            os._HOST = hosts[jit.os]
+        elseif package.config:sub(1, 1) == '\\' then
             os._HOST = "windows"
+        else
+            local result = os.iorun("uname") 
+            if result then
+                if result:lower():find("linux", 1, true) then
+                    os._HOST = "linux"
+                elseif result:lower():find("darwin", 1, true) then
+                    os._HOST = "macosx"
+                end
+            end
         end
     end
     return os._HOST
@@ -89,15 +92,9 @@ end
 -- read string data from pasteboard
 function os.pbpaste()
     if os.host() == "macosx" then
-        local ok, result = os.iorun("pbpaste")
-        if ok then
-            return result
-        end
+        return os.iorun("pbpaste")
     elseif os.host() == "linux" then
-        local ok, result = os.iorun("xsel --clipboard --output")
-        if ok then
-            return result
-        end
+        return os.iorun("xsel --clipboard --output")
     else
         -- TODO
     end
