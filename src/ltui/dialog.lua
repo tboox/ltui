@@ -23,15 +23,15 @@
 --
 
 -- load modules
-local log    = require("ui/log")
-local rect   = require("ui/rect")
-local event  = require("ui/event")
-local label  = require("ui/label")
-local panel  = require("ui/panel")
-local action = require("ui/action")
-local button = require("ui/button")
-local window = require("ui/window")
-local curses = require("ui/curses")
+local log    = require("ltui/base/log")
+local rect   = require("ltui/rect")
+local event  = require("ltui/event")
+local label  = require("ltui/label")
+local panel  = require("ltui/panel")
+local action = require("ltui/action")
+local button = require("ltui/button")
+local window = require("ltui/window")
+local curses = require("ltui/curses")
 
 -- define module
 local dialog = dialog or window()

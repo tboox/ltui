@@ -23,14 +23,14 @@
 --
 
 -- load modules
-local log         = require("ui/log")
-local rect        = require("ui/rect")
-local event       = require("ui/event")
-local action      = require("ui/action")
-local curses      = require("ui/curses")
-local window      = require("ui/window")
-local choicebox   = require("ui/choicebox")
-local boxdialog   = require("ui/boxdialog")
+local log         = require("ltui/base/log")
+local rect        = require("ltui/rect")
+local event       = require("ltui/event")
+local action      = require("ltui/action")
+local curses      = require("ltui/curses")
+local window      = require("ltui/window")
+local choicebox   = require("ltui/choicebox")
+local boxdialog   = require("ltui/boxdialog")
 
 -- define module
 local choicedialog = choicedialog or boxdialog()

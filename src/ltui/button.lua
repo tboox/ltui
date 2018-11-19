@@ -23,12 +23,12 @@
 --
 
 -- load modules
-local log       = require("ui/log")
-local view      = require("ui/view")
-local event     = require("ui/event")
-local label     = require("ui/label")
-local action    = require("ui/action")
-local curses    = require("ui/curses")
+local log       = require("ltui/base/log")
+local view      = require("ltui/view")
+local event     = require("ltui/event")
+local label     = require("ltui/label")
+local action    = require("ltui/action")
+local curses    = require("ltui/curses")
 
 -- define module
 local button = button or label()

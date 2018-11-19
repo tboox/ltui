@@ -23,13 +23,13 @@
 --
 
 -- load modules
-local log       = require("ui/log")
-local view      = require("ui/view")
-local label     = require("ui/label")
-local event     = require("ui/event")
-local border    = require("ui/border")
-local curses    = require("ui/curses")
-local textarea  = require("ui/textarea")
+local log       = require("ltui/base/log")
+local view      = require("ltui/view")
+local label     = require("ltui/label")
+local event     = require("ltui/event")
+local border    = require("ltui/border")
+local curses    = require("ltui/curses")
+local textarea  = require("ltui/textarea")
 
 -- define module
 local textedit = textedit or textarea()

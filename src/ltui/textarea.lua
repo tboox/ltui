@@ -23,11 +23,11 @@
 --
 
 -- load modules
-local log       = require("ui/log")
-local view      = require("ui/view")
-local label     = require("ui/label")
-local event     = require("ui/event")
-local curses    = require("ui/curses")
+local log       = require("ltui/base/log")
+local view      = require("ltui/view")
+local label     = require("ltui/label")
+local event     = require("ltui/event")
+local curses    = require("ltui/curses")
 
 -- define module
 local textarea = textarea or label()
