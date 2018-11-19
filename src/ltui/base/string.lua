@@ -25,6 +25,11 @@
 -- define module: string
 local string = string or {}
 
+-- match the start string
+function string:startswith(str) 
+    return self:find('^' .. str) ~= nil
+end
+
 -- find the last substring with the given pattern
 function string:find_last(pattern, plain)
 

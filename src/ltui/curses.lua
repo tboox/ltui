@@ -28,7 +28,7 @@ $Id: core.lua 18 2007-06-21 20:43:52Z tngd $
 --------------------------------------------------------------------------]]
 
 -- load modules
-local curses = require("ltui.curses")
+local curses = require("ltui.lcurses")
 local os     = require("ltui/base/os")
 local log    = require("ltui/base/log")
 

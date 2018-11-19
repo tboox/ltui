@@ -26,7 +26,16 @@
 local os = os or {}
 
 -- load modules
-local string    = require("ltui/base/string")
+local string = require("ltui/base/string")
+
+-- is file?
+function os.isfile(filepath)
+    local file = filepath and io.open(filepath, 'r') or nil
+    if file then
+        file:close()
+    end
+    return file ~= nil
+end
 
 -- raise an exception and abort the current script
 --

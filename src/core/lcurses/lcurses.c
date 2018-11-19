@@ -2313,7 +2313,7 @@ static const luaL_Reg curseslib[] =
     {NULL, NULL}
 };
 
-__export int luaopen_ltui_curses (lua_State *L)
+__export int luaopen_ltui_lcurses (lua_State *L)
 {
     /*
     ** create new metatable for window objects
