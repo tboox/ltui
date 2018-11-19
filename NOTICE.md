@@ -1,4 +1,4 @@
-A cross-platform build utility based on Lua
+A cross-platform terminal ui library based on Lua
 Copyright 2015-2018 The TBOOX Open Source Group
 
 This product includes software developed by The TBOOX Open Source Group (http://www.tboox.org/).

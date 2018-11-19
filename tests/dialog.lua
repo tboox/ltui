@@ -1,4 +1,4 @@
---!A cross-platform build utility based on Lua
+--!A cross-platform terminal ui library based on Lua
 --
 -- Licensed to the Apache Software Foundation (ASF) under one
 -- or more contributor license agreements.  See the NOTICE file
@@ -75,7 +75,7 @@ function demo:init()
     -- init tips dialog
     local dialog_tips = textdialog:new("dialog.tips", rect {0, 0, 50, 8}):background_set(dialog_main:frame():background())
     dialog_tips:frame():background_set("cyan")
-    dialog_tips:text():text_set("hello xmake! (http://xmake.io)\nA cross-platform build utility based on Lua"):textattr_set("red")
+    dialog_tips:text():text_set("hello xmake! (http://xmake.io)\nA cross-platform terminal ui library based on Lua"):textattr_set("red")
     dialog_tips:button_add("yes", "< Yes >", function (v) dialog_tips:show(false) end)
     dialog_tips:button_add("no", "< No >", function (v) dialog_tips:show(false) end)
     self:insert(dialog_tips, {centerx = true, centery = true})
