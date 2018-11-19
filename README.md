@@ -33,19 +33,57 @@ LTUI is a cross-platform terminal ui library based on Lua.
 
 ## Examples
 
+```lua
+--  requires
+local ltui        = require("ltui")
+local application = ltui.application
+local event       = ltui.event
+local rect        = ltui.rect
+local window      = ltui.window
+
+-- the demo application
+local demo = application()
+
+-- init demo
+function demo:init()
+
+    -- init name 
+    application.init(self, "demo")
+
+    -- init background
+    self:background_set("blue")
+
+    -- init main window
+    self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
+end
+
+-- run demo
+demo:run()
+```
+
 ## Snapshot
 
-#### menuconf
+#### Menu configuation
 
 <img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
 
-#### inputdialog
+#### Input dialog
 
 <img src="https://tboox.org/static/img/ltui/inputdialog.png" width="70%" />
 
-#### textarea
+#### Text area
 
 <img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
+
+## Run tests
+
+```console
+$ luajit tests\dialog.lua
+$ luajit tests\window.lua
+$ luajit tests\desktop.lua
+$ luajit tests\inputdialog.lua
+$ luajit tests\mconfdialog.lua
+```
 
 If you want to known more, please refer to:
 

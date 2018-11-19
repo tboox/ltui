@@ -32,17 +32,70 @@
 
 LTUI是一个基于lua的跨平台字符终端UI界面库。 
 
+## 例子
+
+```lua
+--  requires
+local ltui        = require("ltui")
+local application = ltui.application
+local event       = ltui.event
+local rect        = ltui.rect
+local window      = ltui.window
+
+-- the demo application
+local demo = application()
+
+-- init demo
+function demo:init()
+
+    -- init name 
+    application.init(self, "demo")
+
+    -- init background
+    self:background_set("blue")
+
+    -- init main window
+    self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
+end
+
+-- run demo
+demo:run()
+```
+
+## 快照
+
+#### 菜单配置
+
+<img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
+
+#### 输入框
+
+<img src="https://tboox.org/static/img/ltui/inputdialog.png" width="70%" />
+
+#### 文本区域
+
+<img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
+
+## 运行测试
+
+```console
+$ luajit tests\dialog.lua
+$ luajit tests\window.lua
+$ luajit tests\desktop.lua
+$ luajit tests\inputdialog.lua
+$ luajit tests\mconfdialog.lua
+```
 
 如果你想了解更多，请参考：
 
-* [主页](http://www.tboox.org)
+* [主页](https://tboox.org)
 * [Github](https://github.com/tboox/ltui)
 * [Gitee](https://gitee.com/tboox/ltui)
 
 ## 联系方式
 
 * 邮箱：[waruqi@gmail.com](mailto:waruqi@gmail.com)
-* 主页：[tboox.org](http://www.tboox.org)
+* 主页：[tboox.org](https://tboox.org)
 * 社区：[Reddit论坛](https://www.reddit.com/r/tboox/)
 * 聊天：[Telegram群组](https://t.me/tbooxorg), [Gitter聊天室](https://gitter.im/tboox/tboox?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 * 源码：[Github](https://github.com/tboox/ltui), [Gitee](https://gitee.com/tboox/ltui)

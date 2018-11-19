@@ -25,8 +25,6 @@ require("tests/load")
 
 --  requires
 local ltui        = require("ltui")
-local label       = ltui.label
-local button      = ltui.button
 local application = ltui.application
 local event       = ltui.event
 local rect        = ltui.rect
