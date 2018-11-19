@@ -46,9 +46,19 @@ function demo:init()
     -- init background
     self:background_set("blue")
 
+    -- read help content
+    local helptext = nil
+    local file = io.open("./LICENSE.md", 'r')
+    if file then
+        helptext = file:read("*a")
+        file:close()
+    end
+
     -- init help dialog
     local dialog_help = textdialog:new("dialog.help", rect {1, 1, self:width() - 1, self:height() - 1}, "README")
-    dialog_help:text():text_set("help text ...")
+    if helptext then
+        dialog_help:text():text_set(helptext)
+    end
     dialog_help:button_add("exit", "< Exit >", function (v) self:remove(dialog_help) end)
 
     -- init main dialog
@@ -75,7 +85,7 @@ function demo:init()
     -- init tips dialog
     local dialog_tips = textdialog:new("dialog.tips", rect {0, 0, 50, 8}):background_set(dialog_main:frame():background())
     dialog_tips:frame():background_set("cyan")
-    dialog_tips:text():text_set("hello xmake! (http://xmake.io)\nA cross-platform terminal ui library based on Lua"):textattr_set("red")
+    dialog_tips:text():text_set("hello ltui! (https://tboox.org)\nA cross-platform terminal ui library based on Lua"):textattr_set("red")
     dialog_tips:button_add("yes", "< Yes >", function (v) dialog_tips:show(false) end)
     dialog_tips:button_add("no", "< No >", function (v) dialog_tips:show(false) end)
     self:insert(dialog_tips, {centerx = true, centery = true})

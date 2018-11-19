@@ -31,17 +31,32 @@
 
 LTUI is a cross-platform terminal ui library based on Lua. 
 
+## Examples
+
+## Snapshot
+
+#### menuconf
+
+![](https://tboox.org/static/img/ltui/choicebox.png)
+
+#### inputdialog
+
+![](https://tboox.org/static/img/ltui/inputdialog.png)
+
+#### textarea
+
+![](https://tboox.org/static/img/ltui/textarea.png)
 
 If you want to known more, please refer to:
 
-* [HomePage](http://www.tboox.org)
+* [HomePage](https://tboox.org)
 * [Github](https://github.com/tboox/ltui)
 * [Gitee](https://gitee.com/tboox/ltui)
 
 ## Contacts
 
 * Email：[waruqi@gmail.com](mailto:waruqi@gmail.com)
-* Homepage：[tboox.org](http://www.tboox.org)
+* Homepage：[tboox.org](https://tboox.org)
 * Community：[/r/tboox on reddit](https://www.reddit.com/r/tboox/)
 * ChatRoom：[Char on telegram](https://t.me/tbooxorg), [Chat on gitter](https://gitter.im/tboox/tboox?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 * Source Code：[Github](https://github.com/tboox/ltui), [Gitee](https://gitee.com/tboox/ltui)
