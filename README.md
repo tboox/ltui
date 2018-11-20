@@ -93,6 +93,35 @@ function demo:init()
 end
 ```
 
+## Components
+
+| views |
+|------- |
+| view |
+| panel |
+| label |
+| button |
+| border |
+| window |
+| menubar |
+| menuconf |
+| textedit |
+| textarea |
+| statusbar |
+| choicebox |
+| desktop |
+
+
+| dialogs |
+|------- |
+| dialog |
+| boxdialog |
+| textdialog |
+| inputdialog |
+| mconfdialog |
+| choicedialog |
+
+
 ## Snapshot
 
 #### Menu configuation

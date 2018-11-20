@@ -92,6 +92,34 @@ function demo:init()
 end
 ```
 
+## 组件
+
+| 视图 |
+|------- |
+| view |
+| panel |
+| label |
+| button |
+| border |
+| window |
+| menubar |
+| menuconf |
+| textedit |
+| textarea |
+| statusbar |
+| choicebox |
+| desktop |
+
+
+| 对话框 |
+|------- |
+| dialog |
+| boxdialog |
+| textdialog |
+| inputdialog |
+| mconfdialog |
+| choicedialog |
+
 ## 快照
 
 #### 菜单配置
