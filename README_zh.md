@@ -32,6 +32,9 @@
 
 LTUI是一个基于lua的跨平台字符终端UI界面库。 
 
+此框架源于[xmake](https://github.com/tboox/xmake)中图形化菜单配置的需求，类似linux kernel的menuconf去配置编译参数，因此基于curses和lua实现了一整套跨平台的字符终端ui库。
+而样式风格基本上完全参照的kconfig-frontends，当然用户也可以自己定制不同的ui风格。
+
 ## 编译
 
 我们需要先安装跨平台构建工具：[xmake](https://github.com/tboox/xmake)
@@ -42,70 +45,49 @@ $ xmake
 
 ## 例子
 
-#### 窗口
+#### 应用程序
 
 ```lua
---  requires
 local ltui        = require("ltui")
 local application = ltui.application
 local event       = ltui.event
 local rect        = ltui.rect
 local window      = ltui.window
+local demo        = application()
 
--- the demo application
-local demo = application()
-
--- init demo
 function demo:init()
-
-    -- init name 
     application.init(self, "demo")
-
-    -- init background
     self:background_set("blue")
-
-    -- init main window
     self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
 end
 
--- run demo
 demo:run()
+```
+
+#### 标签 
+
+```lua
+local lab = label:new("title", rect {0, 0, 12, 1}, "hello ltui!"):textattr_set("white")
+```
+
+#### 按钮 
+
+```lua
+local btn = button:new("yes", rect {0, 1, 7, 2}, "< Yes >"):textattr_set("white")
 ```
 
 #### 输入框
 
 ```lua
---  requires
-local ltui        = require("ltui")
-local label       = ltui.label
-local button      = ltui.button
-local application = ltui.application
-local event       = ltui.event
-local rect        = ltui.rect
-local inputdialog = ltui.inputdialog
-
--- the demo application
-local demo = application()
-
--- init demo
 function demo:init()
+    -- ...
 
-    -- init name 
-    application.init(self, "demo")
-
-    -- init background
-    self:background_set("blue")
-
-    -- init input dialog
     local dialog_input = inputdialog:new("dialog.input", rect {0, 0, 50, 8})
     dialog_input:text():text_set("please input text:")
     dialog_input:button_add("no", "< No >", function (v) dialog_input:quit() end)
     dialog_input:button_add("yes", "< Yes >", function (v) dialog_input:quit() end)
     self:insert(dialog_input, {centerx = true, centery = true})
 end
-
--- run demo
-demo:run()
 ```
 
 ## 快照

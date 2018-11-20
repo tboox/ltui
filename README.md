@@ -31,6 +31,11 @@
 
 LTUI is a cross-platform terminal ui library based on Lua. 
 
+This framework originated from the requirements of graphical menu configuration in [xmake](https://github.com/tboox/xmake). 
+Similar to the kernel kernel's menuconf to configure the compilation parameters, so using curses and lua to implement a cross-platform character terminal ui library.
+
+Refer to kconfig-frontends for style rendering. Of course, users can customize different ui styles.
+
 ## Build
 
 We need install the cross-platform build utility [xmake](https://github.com/tboox/xmake) first.
@@ -41,70 +46,49 @@ $ xmake
 
 ## Examples
 
-#### Window
+#### Application
 
 ```lua
---  requires
 local ltui        = require("ltui")
 local application = ltui.application
 local event       = ltui.event
 local rect        = ltui.rect
 local window      = ltui.window
+local demo        = application()
 
--- the demo application
-local demo = application()
-
--- init demo
 function demo:init()
-
-    -- init name 
     application.init(self, "demo")
-
-    -- init background
     self:background_set("blue")
-
-    -- init main window
     self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
 end
 
--- run demo
 demo:run()
+```
+
+#### Label 
+
+```lua
+local lab = label:new("title", rect {0, 0, 12, 1}, "hello ltui!"):textattr_set("white")
+```
+
+#### Button 
+
+```lua
+local btn = button:new("yes", rect {0, 1, 7, 2}, "< Yes >"):textattr_set("white")
 ```
 
 #### Input dialog
 
 ```lua
---  requires
-local ltui        = require("ltui")
-local label       = ltui.label
-local button      = ltui.button
-local application = ltui.application
-local event       = ltui.event
-local rect        = ltui.rect
-local inputdialog = ltui.inputdialog
-
--- the demo application
-local demo = application()
-
--- init demo
 function demo:init()
+    -- ...
 
-    -- init name 
-    application.init(self, "demo")
-
-    -- init background
-    self:background_set("blue")
-
-    -- init input dialog
     local dialog_input = inputdialog:new("dialog.input", rect {0, 0, 50, 8})
     dialog_input:text():text_set("please input text:")
     dialog_input:button_add("no", "< No >", function (v) dialog_input:quit() end)
     dialog_input:button_add("yes", "< Yes >", function (v) dialog_input:quit() end)
     self:insert(dialog_input, {centerx = true, centery = true})
 end
-
--- run demo
-demo:run()
 ```
 
 ## Snapshot

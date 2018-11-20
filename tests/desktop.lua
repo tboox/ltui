@@ -49,7 +49,7 @@ function demo:init()
     self:menubar():title():text_set("Menu Bar (Hello)")
 
     -- add title label
-    self:desktop():insert(label:new("title", rect {0, 0, 12, 1}, "hello xmake!"):textattr_set("white"), {centerx = true})
+    self:desktop():insert(label:new("title", rect {0, 0, 12, 1}, "hello ltui!"):textattr_set("white"), {centerx = true})
 
     -- add yes button
     self:desktop():insert(button:new("yes", rect {0, 1, 7, 2}, "< Yes >"):textattr_set("white"), {centerx = true})
