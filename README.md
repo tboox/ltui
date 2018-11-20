@@ -46,6 +46,18 @@ We need install the cross-platform build utility [xmake](https://github.com/tboo
 $ xmake
 ```
 
+## Run tests
+
+We need install [luajit](http://luajit.org/) to run tests first.
+
+```console
+$ luajit tests\dialog.lua
+$ luajit tests\window.lua
+$ luajit tests\desktop.lua
+$ luajit tests\inputdialog.lua
+$ luajit tests\mconfdialog.lua
+```
+
 ## Examples
 
 #### Application
@@ -126,15 +138,6 @@ end
 
 <img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
 
-## Run tests
-
-```console
-$ luajit tests\dialog.lua
-$ luajit tests\window.lua
-$ luajit tests\desktop.lua
-$ luajit tests\inputdialog.lua
-$ luajit tests\mconfdialog.lua
-```
 
 If you want to known more, please refer to:
 

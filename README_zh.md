@@ -45,6 +45,18 @@ LTUI是一个基于lua的跨平台字符终端UI界面库。
 $ xmake
 ```
 
+## 运行测试
+
+你需要先安装[luajit](http://luajit.org/)程序去加载运行测试程序：
+
+```console
+$ luajit tests\dialog.lua
+$ luajit tests\window.lua
+$ luajit tests\desktop.lua
+$ luajit tests\inputdialog.lua
+$ luajit tests\mconfdialog.lua
+```
+
 ## 例子
 
 #### 应用程序
@@ -125,15 +137,6 @@ end
 
 <img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
 
-## 运行测试
-
-```console
-$ luajit tests\dialog.lua
-$ luajit tests\window.lua
-$ luajit tests\desktop.lua
-$ luajit tests\inputdialog.lua
-$ luajit tests\mconfdialog.lua
-```
 
 如果你想了解更多，请参考：
 
