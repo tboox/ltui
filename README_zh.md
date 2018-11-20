@@ -94,31 +94,22 @@ end
 
 ## 组件
 
-| 视图 |
-|------- |
-| view |
-| panel |
-| label |
-| button |
-| border |
-| window |
-| menubar |
-| menuconf |
-| textedit |
-| textarea |
-| statusbar |
-| choicebox |
-| desktop |
+| 视图      | 对话框       | 其他        |
+| -------   | ------       | ------      |
+| view      | dialog       | event       |
+| panel     | boxdialog    | action      |
+| label     | textdialog   | canvas      |
+| button    | inputdialog  | curses      |
+| border    | mconfdialog  | program     |
+| window    | choicedialog | application |
+| menubar   |              | point       |
+| menuconf  |              | rect        |
+| textedit  |              | object      |
+| textarea  |              |             |
+| statusbar |              |             |
+| choicebox |              |             |
+| desktop   |              |             |
 
-
-| 对话框 |
-|------- |
-| dialog |
-| boxdialog |
-| textdialog |
-| inputdialog |
-| mconfdialog |
-| choicedialog |
 
 ## 快照
 
