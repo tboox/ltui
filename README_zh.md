@@ -35,6 +35,8 @@ LTUI是一个基于lua的跨平台字符终端UI界面库。
 此框架源于[xmake](https://github.com/tboox/xmake)中图形化菜单配置的需求，类似linux kernel的menuconf去配置编译参数，因此基于curses和lua实现了一整套跨平台的字符终端ui库。
 而样式风格基本上完全参照的kconfig-frontends，当然用户也可以自己定制不同的ui风格。
 
+<img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
+
 ## 编译
 
 我们需要先安装跨平台构建工具：[xmake](https://github.com/tboox/xmake)
