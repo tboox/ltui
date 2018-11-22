@@ -13,7 +13,12 @@ target("lcurses")
     add_files("lcurses.c") 
 
     -- add packages
-    add_packages("luajit")
+    if has_config("luajit") then
+        add_defines("LUAJIT")
+        add_packages("luajit")
+    else
+        add_packages("lua")
+    end
   
     -- add links
     if is_plat("windows") then

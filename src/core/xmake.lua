@@ -28,8 +28,20 @@ if is_plat("windows") then
     add_links("kernel32", "user32", "gdi32", "advapi32")
 end
 
+-- option: luajit
+option("luajit")
+    set_default(false)
+    set_showmenu(true)
+    set_category("option")
+    set_description("Enable the luajit runtime engine.")
+option_end()
+
 -- add requires
-add_requires("luajit")
+if has_config("luajit") then
+    add_requires("luajit", {nolink = true})
+else
+    add_requires("lua", {nolink = true})
+end
 
 -- add target
 target("ltui")
@@ -42,6 +54,11 @@ target("ltui")
 
     -- set target directory
     set_targetdir("$(buildir)")
+
+    -- dynamic lookup liblua symbols
+    if is_plat("macosx") then
+        add_shflags("-undefined dynamic_lookup")
+    end
 
 -- add projects
 includes("lcurses")

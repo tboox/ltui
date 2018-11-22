@@ -63,6 +63,9 @@ Notes:
 #include <stdlib.h>
 #include <string.h>
 
+#ifndef LUAJIT
+#   define LUA_COMPAT_5_1
+#endif
 #include "luaconf.h"
 #undef LUA_API
 #if defined(__cplusplus)
@@ -71,7 +74,11 @@ Notes:
 #define LUA_API extern
 #endif
 
-#include "luajit.h"
+#ifdef LUAJIT
+#   include "luajit.h"
+#else
+#   include "lua.h"
+#endif
 #include "lualib.h"
 #include "lauxlib.h"
 
@@ -339,7 +346,10 @@ static chtype lc_checkch(lua_State *L, int index)
     if (lua_type(L, index) == LUA_TSTRING)
         return *lua_tostring(L, index);
 
+#if LUA_VERSION_NUM <= 501
     luaL_typerror(L, index, "chtype");
+#endif
+
     /* never executes */
     return (chtype)0;
 }
@@ -2330,7 +2340,11 @@ __export int luaopen_ltui_lcurses (lua_State *L)
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -2);               /* push metatable */
     lua_rawset(L, -3);                  /* metatable.__index = metatable */
+#if LUA_VERSION_NUM <= 501
     luaL_openlib(L, NULL, windowlib, 0);
+#else
+    luaL_setfuncs(L, windowlib, 0);
+#endif
 
     lua_pop(L, 1);                      /* remove metatable from stack */
 
@@ -2341,7 +2355,11 @@ __export int luaopen_ltui_lcurses (lua_State *L)
     lua_pushliteral(L, "__index");
     lua_pushvalue(L, -2);               /* push metatable */
     lua_rawset(L, -3);                  /* metatable.__index = metatable */
+#if LUA_VERSION_NUM <= 501
     luaL_openlib(L, NULL, chstrlib, 0);
+#else
+    luaL_setfuncs(L, chstrlib, 0);
+#endif
 
     lua_pop(L, 1);                      /* remove metatable from stack */
 
@@ -2350,7 +2368,12 @@ __export int luaopen_ltui_lcurses (lua_State *L)
     ** create global table with curses methods/variables/constants
     */
     lua_newtable(L);
+#if LUA_VERSION_NUM <= 501
     luaL_register(L, NULL, curseslib);
+#else
+    lua_newtable(L);
+    luaL_setfuncs(L, curseslib, 0);
+#endif
 
     lua_pushstring(L, "init");
     lua_pushvalue(L, -2);
