@@ -38,9 +38,9 @@ option_end()
 
 -- add requires
 if has_config("luajit") then
-    add_requires("luajit", {nolink = true})
+    add_requires("luajit", {nolink = not is_plat("windows")})
 else
-    add_requires("lua", {nolink = true})
+    add_requires("lua", {nolink = not is_plat("windows")})
 end
 
 -- add target
@@ -49,11 +49,27 @@ target("ltui")
     -- make as a shared library
     set_kind("shared")
 
-    -- add deps
-    add_deps("lcurses")
-
     -- set target directory
     set_targetdir("$(buildir)")
+
+    -- set languages
+    set_languages("c89")
+
+    -- add packages
+    if has_config("luajit") then
+        add_defines("LUAJIT")
+        add_packages("luajit")
+    else
+        add_packages("lua")
+    end
+  
+    -- add links
+    if is_plat("windows") then
+        add_defines("PDCURSES")
+        add_includedirs("pdcurses")
+    else
+        add_links("curses")
+    end
 
     -- dynamic lookup liblua symbols
     if is_plat("macosx") then
