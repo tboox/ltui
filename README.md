@@ -51,6 +51,16 @@ $ xmake
 We need install [lua](https://www.lua.org/) or [luajit](http://luajit.org/) to run tests first.
 
 ```console
+$ xmake run test dialog
+$ xmake run test window
+$ xmake run test desktop
+$ xmake run test inputdialog
+$ xmake run test mconfdialog
+```
+
+Or
+
+```console
 $ lua tests\dialog.lua
 $ lua tests\window.lua
 $ lua tests\desktop.lua

@@ -44,6 +44,36 @@ else
 end
 
 -- add target
+target("test")
+
+    -- only for test
+    set_kind("phony")
+
+    -- default: disable
+    set_default(false)
+
+    -- we need build ltui first
+    add_deps("ltui")
+
+    -- run tests
+    on_run(function (target)
+
+        -- imports
+        import("core.base.option")
+        import("lib.detect.find_tool")
+
+        -- do run
+        local lua = has_config("luajit") and find_tool("luajit") or find_tool("lua")
+        if lua then
+            os.cd(os.projectdir())
+            local testname = table.wrap(option.get("arguments"))[1] or "mconfdialog"
+            os.execv(lua.program, {path.join("tests", testname .. ".lua")})
+        else
+            raise("%s not found!", has_config("luajit") and "luajit" or "lua")
+        end
+    end)
+
+-- add target
 target("ltui")
 
     -- make as a shared library

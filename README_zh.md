@@ -50,6 +50,16 @@ $ xmake
 你需要先安装[lua](https://www.lua.org/)或者[luajit](http://luajit.org/)程序去加载运行测试程序：
 
 ```console
+$ xmake run test dialog
+$ xmake run test window
+$ xmake run test desktop
+$ xmake run test inputdialog
+$ xmake run test mconfdialog
+```
+
+或者
+
+```console
 $ lua tests\dialog.lua
 $ lua tests\window.lua
 $ lua tests\desktop.lua
