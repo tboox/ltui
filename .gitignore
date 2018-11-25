@@ -1,6 +1,7 @@
 *.a
 *.b
 *.o
+*.so
 *.exe
 *.obj
 *.dll
@@ -27,6 +28,7 @@
 *.gch
 *.gch.d
 *.sys
+*.rock
 cscope.*
 gmon.out
 tags
