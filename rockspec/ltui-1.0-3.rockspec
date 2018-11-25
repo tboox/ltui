@@ -1,12 +1,17 @@
 package = "ltui"
-version = "1.0-2"
+version = "1.0-3"
 source = {
     url = "https://github.com/tboox/ltui/archive/v1.0.zip"
 }
 description = {
     detailed = [[
-        A cross-platform terminal ui library based on Lua
-        ]],
+LTUI is a cross-platform terminal ui library based on Lua. 
+
+This framework originated from the requirements of graphical menu configuration in [xmake](https://github.com/tboox/xmake). 
+Similar to the kernel kernel's menuconf to configure the compilation parameters, so using curses and lua to implement a cross-platform character terminal ui library.
+
+Refer to kconfig-frontends for style rendering. Of course, users can customize different ui styles.
+]],
     homepage = "https://tboox.org",
     summary = "A cross-platform terminal ui library based on Lua",
     license = "Apache-2.0"
