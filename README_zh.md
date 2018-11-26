@@ -36,7 +36,7 @@
       <img src="https://img.shields.io/badge/donate-us-orange.svg?style=flat-square" alt="Donate" />
     </a>
     </div>
-  <p>A cross-platform terminal ui library based on Lua</p>
+  <p>一个基于lua的跨平台字符终端UI界面库</p>
 </div>
 
 ## 简介
