@@ -15,5 +15,5 @@ install:
 
 script:
   - xmake repo --add xmake-repo-dev https://github.com/tboox/xmake-repo.git dev
-  - xmake -y
+  - xmake -y -v
 
