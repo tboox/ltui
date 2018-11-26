@@ -38,6 +38,12 @@ Refer to kconfig-frontends for style rendering. Of course, users can customize d
 
 <img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
 
+## Installation
+
+```console
+$ luarocks install ltui
+```
+
 ## Build
 
 We need install the cross-platform build utility [xmake](https://github.com/tboox/xmake) first.

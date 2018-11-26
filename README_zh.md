@@ -37,6 +37,12 @@ LTUI是一个基于lua的跨平台字符终端UI界面库。
 
 <img src="https://tboox.org/static/img/ltui/choicebox.png" width="70%" />
 
+## 安装
+
+```console
+$ luarocks install ltui
+```
+
 ## 编译
 
 我们需要先安装跨平台构建工具：[xmake](https://github.com/tboox/xmake)
