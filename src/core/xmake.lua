@@ -38,9 +38,9 @@ option_end()
 
 -- add requires
 if has_config("luajit") then
-    add_requires("luajit", {nolink = not is_plat("windows")})
+    add_requires("luajit")
 else
-    add_requires("lua", {nolink = not is_plat("windows")})
+    add_requires("lua")
 end
 if not is_plat("windows") then
     add_requires("ncurses", {config = {cflags = "-fPIC"}})
@@ -88,20 +88,24 @@ target("ltui")
     -- set languages
     set_languages("c89")
 
-    -- add packages
+    -- add lua and do not link it on linux and macos
+    local lualinks = nil
+    if not is_plat("windows") then
+        lualinks = {} 
+    end
     if has_config("luajit") then
         add_defines("LUAJIT")
-        add_packages("luajit")
+        add_packages("luajit", {links = lualinks})
     else
-        add_packages("lua")
+        add_packages("lua", {links = lualinks})
     end
   
-    -- add links
+    -- add curses 
     if is_plat("windows") then
         add_defines("PDCURSES")
         add_includedirs("pdcurses")
     else
-        add_packages("ncurses")
+        add_packages("ncurses", {links = "ncurses"})
     end
 
     -- dynamic lookup liblua symbols
