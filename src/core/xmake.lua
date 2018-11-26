@@ -42,6 +42,9 @@ if has_config("luajit") then
 else
     add_requires("lua", {nolink = not is_plat("windows")})
 end
+if not is_plat("windows") then
+    add_requires("ncurses")
+end
 
 -- add target
 target("test")
@@ -98,7 +101,7 @@ target("ltui")
         add_defines("PDCURSES")
         add_includedirs("pdcurses")
     else
-        add_links("curses")
+        add_packages("ncurses")
     end
 
     -- dynamic lookup liblua symbols

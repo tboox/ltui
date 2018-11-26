@@ -1,5 +1,5 @@
 target("ltui")
     
     -- add source files
-    add_files("lcurses.c") 
+    add_files("lcurses.c", {languages = "c99"}) 
 
