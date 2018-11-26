@@ -43,7 +43,7 @@ else
     add_requires("lua", {nolink = not is_plat("windows")})
 end
 if not is_plat("windows") then
-    add_requires("ncurses")
+    add_requires("ncurses", {config = {cflags = "-fPIC"}})
 end
 
 -- add target
