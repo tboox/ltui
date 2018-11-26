@@ -43,7 +43,7 @@
 LTUI is a cross-platform terminal ui library based on Lua. 
 
 This framework originated from the requirements of graphical menu configuration in [xmake](https://github.com/tboox/xmake). 
-Similar to the kernel kernel's menuconf to configure the compilation parameters, so using curses and lua to implement a cross-platform character terminal ui library.
+Similar to the linux kernel's menuconf to configure the compilation parameters, so using curses and lua to implement a cross-platform character terminal ui library.
 
 Refer to kconfig-frontends for style rendering. Of course, users can customize different ui styles.
 
