@@ -3,9 +3,20 @@
   <h1>LTUI</h1>
 
   <div>
+    <a href="https://travis-ci.org/tboox/ltui">
+      <img src="https://img.shields.io/travis/tboox/ltui/master.svg?style=flat-square" alt="travis-ci" />
+    </a>
+    <a href="https://ci.appveyor.com/project/waruqi/ltui/branch/master">
+      <img src="https://img.shields.io/appveyor/ci/waruqi/ltui/master.svg?style=flat-square" alt="appveyor-ci" />
+    </a>
     <a href="https://github.com/tboox/ltui/releases">
       <img src="https://img.shields.io/github/release/tboox/ltui.svg?style=flat-square" alt="Github All Releases" />
     </a>
+    <a href="http://luarocks.org/modules/waruqi/ltui">
+      <img src="https://img.shields.io/luarocks/v/waruqi/ltui.svg?style=flat-square" alt="Luarocks" />
+    </a>
+  </div>
+  <div>
     <a href="https://github.com/tboox/ltui/blob/master/LICENSE.md">
       <img src="https://img.shields.io/github/license/tboox/ltui.svg?colorB=f48041&style=flat-square" alt="license" />
     </a>
