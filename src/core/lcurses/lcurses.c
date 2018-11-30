@@ -2331,6 +2331,10 @@ static const luaL_Reg curseslib[] =
     {NULL, NULL}
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 __export int luaopen_ltui_lcurses (lua_State *L)
 {
     /*
@@ -2382,6 +2386,10 @@ __export int luaopen_ltui_lcurses (lua_State *L)
 
     return 1;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 /* initialize the character map table with the known values after
 ** curses initialization (for ACS_xxx values) */
