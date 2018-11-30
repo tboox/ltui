@@ -65,6 +65,7 @@ Notes:
 
 #ifndef LUAJIT
 #   define LUA_COMPAT_5_1
+#   define LUA_COMPAT_ALL
 #endif
 #include "luaconf.h"
 #undef LUA_API
