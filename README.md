@@ -163,7 +163,7 @@ end
 
 ## Snapshot
 
-#### Menu configuation
+#### Menu configuration
 
 <img src="https://tboox.org/static/img/ltui/menuconf.png" width="70%" />
 
