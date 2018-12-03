@@ -111,7 +111,7 @@ target("ltui")
     -- add curses 
     if is_plat("windows") then
         add_defines("PDCURSES")
-        add_includedirs("pdcurses")
+        add_includedirs("src/core/pdcurses")
     else
         add_packages("ncurses", {links = "ncurses"})
     end
