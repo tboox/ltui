@@ -675,8 +675,9 @@ static int lc_initscr(lua_State *L)
         return 0;
 
     #if defined(NCURSES_VERSION)
-    /* acomodate this value for cui keyboard handling */
-    ESCDELAY = 0;
+    /* acomodate this value for ltui keyboard handling */
+    //ESCDELAY = 0;
+    set_escdelay(0);
     #endif
 
     /* return stdscr - main window */
