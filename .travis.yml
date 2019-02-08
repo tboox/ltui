@@ -8,12 +8,12 @@ compiler:
   - clang
 
 install:
-  - git clone --branch=dev https://github.com/tboox/xmake.git tboox/xmake --depth 1
-  - cd ./tboox/xmake
+  - git clone --branch=dev https://github.com/xmake-io/xmake.git xmake-io/xmake --depth 1
+  - cd ./xmake-io/xmake
   - ./scripts/get.sh __local__
   - cd -
 
 script:
-  - xmake repo --add xmake-repo-dev https://github.com/tboox/xmake-repo.git dev
+  - xmake repo --add xmake-repo-dev https://github.com/xmake-io/xmake-repo.git dev
   - xmake -y -v
 
