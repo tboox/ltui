@@ -760,7 +760,9 @@ static int lc_pair_content(lua_State *L)
     return 2;
 }
 
+#ifdef COLORS
 LC_NUMBER2(COLORS, COLORS)
+#endif
 LC_NUMBER2(COLOR_PAIRS, COLOR_PAIRS)
 
 static int lc_COLOR_PAIR(lua_State *L)
@@ -2252,7 +2254,9 @@ static const luaL_Reg curseslib[] =
     { "has_colors",     lc_has_colors   },
     { "init_pair",      lc_init_pair    },
     { "pair_content",   lc_pair_content },
+#ifdef COLORS
     { "colors",         lc_COLORS       },
+#endif
     { "color_pairs",    lc_COLOR_PAIRS  },
     { "color_pair",     lc_COLOR_PAIR   },
 
