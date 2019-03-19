@@ -44,6 +44,9 @@ option("luajit")
     set_description("Enable the luajit runtime engine.")
 option_end()
 
+-- add repositories
+--add_repositories("xmake-repo-dev https://github.com/xmake-io/xmake-repo.git dev")
+
 -- add requires
 if has_config("luajit") then
     add_requires("luajit")
@@ -51,7 +54,7 @@ else
     add_requires("lua")
 end
 if not is_plat("windows") then
-    add_requires("ncurses", {config = {cflags = "-fPIC"}})
+    add_requires("ncurses", {configs = {cflags = "-fPIC"}})
 end
 
 -- add target
@@ -65,6 +68,13 @@ target("test")
 
     -- we need build ltui first
     add_deps("ltui")
+
+    -- add packages to bind path environments
+    if has_config("luajit") then
+        add_packages("luajit")
+    else
+        add_packages("lua")
+    end
 
     -- run tests
     on_run(function (target)
