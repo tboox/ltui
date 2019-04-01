@@ -5,7 +5,7 @@ set_project("ltui")
 set_version("1.1", {build = "%Y%m%d%H%M"})
 
 -- set xmake min version
-set_xmakever("2.2.3")
+set_xmakever("2.2.5")
 
 -- set warning all as error
 set_warnings("all", "error")
