@@ -1,8 +1,8 @@
 package = "ltui"
-version = "1.5-1"
+version = "1.6-1"
 source = {
     url = "git://github.com/tboox/ltui",
-    tag = "v1.5"
+    tag = "v1.6"
 }
 description = {
     detailed = [[
@@ -24,7 +24,8 @@ build = {
     type = "builtin",
     modules = {
         ["ltui"] = {
-            sources = "src/core/lcurses/lcurses.c"
+            sources = "src/core/lcurses/lcurses.c",
+            libraries = {"curses"}
         }
     },
     install = {

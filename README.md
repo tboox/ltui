@@ -78,21 +78,21 @@ $ xmake run test mconfdialog
 Or
 
 ```console
-$ lua tests\dialog.lua
-$ lua tests\window.lua
-$ lua tests\desktop.lua
-$ lua tests\inputdialog.lua
-$ lua tests\mconfdialog.lua
+$ lua tests/dialog.lua
+$ lua tests/window.lua
+$ lua tests/desktop.lua
+$ lua tests/inputdialog.lua
+$ lua tests/mconfdialog.lua
 ```
 
 Or
 
 ```console
-$ luajit tests\dialog.lua
-$ luajit tests\window.lua
-$ luajit tests\desktop.lua
-$ luajit tests\inputdialog.lua
-$ luajit tests\mconfdialog.lua
+$ luajit tests/dialog.lua
+$ luajit tests/window.lua
+$ luajit tests/desktop.lua
+$ luajit tests/inputdialog.lua
+$ luajit tests/mconfdialog.lua
 ```
 
 ## Examples
