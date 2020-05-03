@@ -120,7 +120,7 @@ target("ltui")
         add_defines("PDCURSES")
         add_includedirs("src/core/pdcurses")
     else
-        add_packages("ncurses", {links = "ncurses"})
+        add_packages("ncurses")
     end
 
     -- dynamic lookup liblua symbols
