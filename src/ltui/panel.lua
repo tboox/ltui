@@ -89,17 +89,8 @@ function panel:view(name)
     return self._VIEWS_CACHE[name]
 end
 
--- insert view
-function panel:insert(v, opt)
-
-    -- check
-    assert(not v:parent() or v:parent() == self)
-    assert(not self:view(v:name()), v:name() .. " has been in this panel!")
-
-    -- this view has been inserted into this panel? remove it first
-    if v:parent() == self then
-        self:remove(v)
-    end
+-- center view
+function panel:center(v, opt)
 
     -- center this view if centerx or centery are set
     local bounds = v:bounds()
@@ -117,6 +108,22 @@ function panel:insert(v, opt)
         bounds:move(org.x - bounds.sx, org.y - bounds.sy)
         v:invalidate(true)
     end
+end
+
+-- insert view
+function panel:insert(v, opt)
+
+    -- check
+    assert(not v:parent() or v:parent() == self)
+    assert(not self:view(v:name()), v:name() .. " has been in this panel!")
+
+    -- this view has been inserted into this panel? remove it first
+    if v:parent() == self then
+        self:remove(v)
+    end
+
+    -- center this view if centerx or centery are set
+    self:center(v, opt)
 
     -- insert this view
     self._VIEWS:push(v)
@@ -315,18 +322,13 @@ end
 -- resize panel 
 function panel:resize()
 
-    -- resize panel?
-    local resize = self:state("resize")
-    if resize then
-        view.resize(self)
-    end
+    -- resize panel
+    view.resize(self)
 
     -- resize all child views
     for v in self:views() do
-        if resize then
-            v:state_set("resize", true)
-        end
-        if v:state("visible") and (v:state("resize") or v:type() == "panel") then
+        v:state_set("resize", true)
+        if v:state("visible") then
             v:resize()
         end
     end

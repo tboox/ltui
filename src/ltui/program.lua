@@ -18,11 +18,6 @@
 -- @file        program.lua
 --
 
---[[ Console User Interface (cui) ]-----------------------------------------
-Author: Tiago Dionizio (tiago.dionizio AT gmail.com)
-$Id: program.lua 18 2007-06-21 20:43:52Z tngd $
---------------------------------------------------------------------------]]
-
 -- load modules
 local log    = require("ltui/base/log")
 local rect   = require("ltui/rect")
@@ -162,10 +157,22 @@ function program:event_on(e)
         focused_view = parent
     end
 
+    -- do event
+    if e.type == event.ev_keyboard then
+        -- resize?
+        if e.key_name == "Resize" then
+            self:bounds_set(rect {0, 0, curses.columns(), curses.lines()})
+            return true
+        -- refresh?
+        elseif e.key_name == "Refresh" then
+            self:invalidate() 
+            return true
+        -- ctrl+c? quit program
+        elseif e.key_name == "CtrlC" then
+            self:send("cm_exit")
+            return true
+        end
     -- quit program?
-    if e.type == event.ev_keyboard and e.key_name == "CtrlC" then
-        self:send("cm_exit")
-        return true
     elseif event.is_command(e, "cm_exit") then
         self:quit()
         return true
@@ -220,7 +227,9 @@ function program:loop(argv)
         end
 
         -- resize views
-        self:resize()
+        if self:state("resize") then
+            self:resize()
+        end
 
         -- draw views
         self:draw()
