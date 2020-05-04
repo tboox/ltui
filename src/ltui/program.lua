@@ -140,7 +140,7 @@ function program:event()
 end
 
 -- on event
-function program:event_on(e)
+function program:on_event(e)
 
     -- get the top focused view
     local focused_view = self
@@ -151,7 +151,7 @@ function program:event_on(e)
     -- do event for focused views
     while focused_view and focused_view ~= self do
         local parent = focused_view:parent()
-        if focused_view:event_on(e) then
+        if focused_view:on_event(e) then
             return true
         end
         focused_view = parent
@@ -180,7 +180,7 @@ function program:event_on(e)
 end
 
 -- put an event to view
-function program:event_put(e)
+function program:put_event(e)
     
     -- init event queue
     self._EVENT_QUEUE = self._EVENT_QUEUE or {}
@@ -191,7 +191,7 @@ end
 
 -- send command
 function program:send(command, extra)
-    self:event_put(event.command {command, extra})
+    self:put_event(event.command {command, extra})
 end
 
 -- quit program
@@ -213,11 +213,11 @@ function program:loop(argv)
         -- do event
         if e then
             event.dump(e)
-            self:event_on(e)
+            self:on_event(e)
             sleep = false
         else
             -- do idle event
-            self:event_on(event.idle())
+            self:on_event(event.idle())
             sleep = true
         end
 
@@ -228,14 +228,16 @@ function program:loop(argv)
 
         -- resize views
         if self:state("resize") then
-            self:resize()
+            self:on_resize()
         end
 
         -- draw views
         self:draw()
 
         -- refresh views
-        self:refresh()
+        if self:state("refresh") then
+            self:on_refresh()
+        end
 
         -- wait some time, 50ms
         if sleep then
@@ -245,15 +247,10 @@ function program:loop(argv)
 end
 
 -- refresh program
-function program:refresh()
-
-    -- need not refresh? do not refresh it
-    if not self:state("refresh") then
-        return 
-    end
+function program:on_refresh()
 
     -- refresh views
-    panel.refresh(self)
+    panel.on_refresh(self)
 
     -- trace
     log:print("%s: refresh ..", self)

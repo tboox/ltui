@@ -123,12 +123,12 @@ function demo:dialog_tips()
     return dialog_tips
 end
 
--- resize dialog 
-function demo:resize()
+-- on resize  
+function demo:on_resize()
     self:dialog_main():bounds_set(rect {1, 1, self:width() - 1, self:height() - 1})
     self:center(self:dialog_input(), {centerx = true, centery = true})
     self:center(self:dialog_tips(), {centerx = true, centery = true})
-    application.resize(self)
+    application.on_resize(self)
 end
 
 -- run demo

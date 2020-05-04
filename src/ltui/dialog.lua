@@ -102,12 +102,12 @@ function dialog:quit()
 end
 
 -- on event
-function dialog:event_on(e)
+function dialog:on_event(e)
     if e.type == event.ev_keyboard and e.key_name == "Esc" then
         self:quit()
         return true
     end
-    return window.event_on(self, e)
+    return window.on_event(self, e)
 end
 
 -- return module

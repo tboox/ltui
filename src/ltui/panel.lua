@@ -276,7 +276,7 @@ function panel:select_prev(start)
 end
 
 -- on event
-function panel:event_on(e)
+function panel:on_event(e)
  
     -- select view?
     if e.type == event.ev_keyboard then
@@ -320,22 +320,22 @@ function panel:draw(transparent)
 end
 
 -- resize panel 
-function panel:resize()
+function panel:on_resize()
 
     -- resize panel
-    view.resize(self)
+    view.on_resize(self)
 
     -- resize all child views
     for v in self:views() do
         v:state_set("resize", true)
         if v:state("visible") then
-            v:resize()
+            v:on_resize()
         end
     end
 end
 
 -- refresh panel
-function panel:refresh()
+function panel:on_refresh()
 
     -- need not refresh? do not refresh it
     if not self:state("refresh") or not self:state("visible") then
@@ -345,13 +345,13 @@ function panel:refresh()
     -- refresh all child views
     for v in self:views() do
         if v:state("refresh") then
-            v:refresh()
+            v:on_refresh()
             v:state_set("refresh", false)
         end
     end
 
     -- refresh it
-    view.refresh(self)
+    view.on_refresh(self)
 
     -- clear mark
     self:state_set("refresh", false)

@@ -59,8 +59,8 @@ function view:init(name, bounds)
     state.selected       = false     -- is selected?
     state.focused        = false     -- is focused?
     state.redraw         = true      -- need redraw 
-    state.refresh        = true      -- need refresh
-    state.resize         = true      -- need resize
+    state.on_refresh        = true      -- need refresh
+    state.on_resize         = true      -- need resize
     self._STATE          = state
 
     -- init options
@@ -188,7 +188,7 @@ function view:draw(transparent)
 end
 
 -- refresh view
-function view:refresh()
+function view:on_refresh()
 
     -- refresh to the parent view
     local parent = self:parent()
@@ -209,7 +209,7 @@ function view:refresh()
 end
 
 -- resize bounds of inner child views (abstract)
-function view:resize()
+function view:on_resize()
 
     -- trace
     log:print("%s: resize ..", self)
@@ -265,7 +265,7 @@ end
 -- 
 -- @return true: done and break dispatching, false/nil: continous to dispatch to other views
 --
-function view:event_on(e)
+function view:on_event(e)
 end
 
 -- get the current event
@@ -274,8 +274,8 @@ function view:event()
 end
 
 -- put an event to view
-function view:event_put(e)
-    return self:parent() and self:parent():event_put(e)
+function view:put_event(e)
+    return self:parent() and self:parent():put_event(e)
 end
 
 -- get type

@@ -46,8 +46,8 @@ Pressing <Y> includes, <N> excludes. Enter <Esc> or <Back> to go back, <?> for H
 ]])
 
     -- init buttons
-    self:button_add("select", "< Select >", function (v, e) self:menuconf():event_on(event.command {"cm_enter"}) end)
-    self:button_add("back", "< Back >", function (v, e) self:menuconf():event_on(event.command {"cm_back"}) end)
+    self:button_add("select", "< Select >", function (v, e) self:menuconf():on_event(event.command {"cm_enter"}) end)
+    self:button_add("back", "< Back >", function (v, e) self:menuconf():on_event(event.command {"cm_back"}) end)
     self:button_add("exit", "< Exit >", function (v, e) self:quit() end)
     self:button_add("help", "< Help >", function (v, e) self:show_help() end) 
     self:button_add("save", "< Save >", function (v, e) self:action_on(action.ac_on_save) end)
@@ -288,12 +288,12 @@ function mconfdialog:show_result(text)
 end
 
 -- on event
-function mconfdialog:event_on(e)
+function mconfdialog:on_event(e)
 
     -- select config
     if e.type == event.ev_keyboard then
         if e.key_name == "Down" or e.key_name == "Up" or e.key_name == " " or e.key_name == "Esc" or e.key_name:lower() == "y" or e.key_name:lower() == "n" then
-            return self:menuconf():event_on(e)
+            return self:menuconf():on_event(e)
         elseif e.key_name == "?" then
             self:show_help()
             return true
@@ -302,7 +302,7 @@ function mconfdialog:event_on(e)
             return true
         end
     end
-    return boxdialog.event_on(self, e) 
+    return boxdialog.on_event(self, e) 
 end
 
 -- return module

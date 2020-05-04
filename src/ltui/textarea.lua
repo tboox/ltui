@@ -100,7 +100,7 @@ function textarea:scroll_to_end()
 end
 
 -- on event
-function textarea:event_on(e)
+function textarea:on_event(e)
     if e.type == event.ev_keyboard then
         if e.key_name == "Up" then
             self:scroll(-5)

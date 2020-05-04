@@ -71,7 +71,7 @@ function textedit:text_set(text)
 end
 
 -- on event
-function textedit:event_on(e)
+function textedit:on_event(e)
 
     -- update text
     if e.type == event.ev_keyboard then
@@ -97,7 +97,7 @@ function textedit:event_on(e)
     end
 
     -- do textarea event
-    return textarea.event_on(self, e) 
+    return textarea.on_event(self, e) 
 end
 
 -- return module

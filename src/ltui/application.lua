@@ -84,8 +84,8 @@ function application:statusbar()
 end
 
 -- on event
-function application:event_on(e)
-    program.event_on(self, e)
+function application:on_event(e)
+    program.on_event(self, e)
 end
 
 -- run application 

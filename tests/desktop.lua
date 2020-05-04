@@ -59,8 +59,8 @@ function demo:init()
 end
 
 -- on event
-function demo:event_on(e)
-    if application.event_on(self, e) then
+function demo:on_event(e)
+    if application.on_event(self, e) then
         return true
     end
     if e.type == event.ev_keyboard then

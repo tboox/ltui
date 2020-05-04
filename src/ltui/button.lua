@@ -73,7 +73,7 @@ function button:draw(transparent)
 end
 
 -- on event
-function button:event_on(e)
+function button:on_event(e)
 
     -- selected?
     if not self:state("selected") then
