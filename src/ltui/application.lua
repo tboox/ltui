@@ -88,6 +88,14 @@ function application:on_event(e)
     program.on_event(self, e)
 end
 
+-- on resize
+function application:on_resize()
+    self:menubar():bounds_set(rect{0, 0, self:width(), 1})
+    self:desktop():bounds_set(rect{0, 1, self:width(), self:height() - 1})
+    self:statusbar():bounds_set(rect{0, self:height() - 1, self:width(), self:height()})
+    program.on_resize(self)
+end
+
 -- run application 
 function application:run(...)
 

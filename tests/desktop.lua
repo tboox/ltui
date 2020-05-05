@@ -75,5 +75,13 @@ function demo:on_event(e)
     end
 end
 
+-- on resize
+function demo:on_resize()
+    for v in self:desktop():views() do
+        self:center(v, {centerx = true})
+    end
+    application.on_resize(self)
+end
+
 -- run demo
 demo:run()
