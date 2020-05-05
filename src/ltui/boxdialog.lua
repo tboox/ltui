@@ -75,5 +75,11 @@ function boxdialog:box()
     return self._BOX
 end
 
+-- on resize
+function boxdialog:on_resize()
+    self:text():text_set(self:text():text())
+    textdialog.on_resize(self)
+end
+
 -- return module
 return boxdialog
