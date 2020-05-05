@@ -31,6 +31,25 @@ local curses = require("ltui/curses")
 
 -- define module
 local dialog = dialog or window()
+    
+-- update the position of all buttons 
+function dialog:_update_buttons_layout()
+
+    -- update the position of all buttons 
+    local index = 1
+    local width = self:buttons():width()
+    local count = self:buttons():count()
+    local padding = math.floor(width / 8)
+    for v in self:buttons():views() do
+        local x = padding + index * math.floor((width - padding * 2) / (count + 1)) - math.floor(v:width() / 2)
+        if x + v:width() > width then
+            x = math.max(0, width - v:width())
+        end
+        v:bounds():move2(x, 0)
+        v:invalidate(true)
+        index = index + 1
+    end
+end
 
 -- init dialog
 function dialog:init(name, bounds, title)
@@ -40,6 +59,10 @@ function dialog:init(name, bounds, title)
 
     -- insert buttons
     self:panel():insert(self:buttons())
+    self:panel():action_add(action.ac_on_resized, function (v)
+        self:buttons():bounds_set(rect:new(0, v:height() - 1, v:width(), 1))
+        self:_update_buttons_layout()
+    end)
 end
 
 -- get buttons
@@ -65,19 +88,7 @@ function dialog:button_add(name, text, command)
     self:buttons():insert(btn)
 
     -- update the position of all buttons 
-    local index = 1
-    local width = self:buttons():width()
-    local count = self:buttons():count()
-    local padding = math.floor(width / 8)
-    for v in self:buttons():views() do
-        local x = padding + index * math.floor((width - padding * 2) / (count + 1)) - math.floor(v:width() / 2)
-        if x + v:width() > width then
-            x = math.max(0, width - v:width())
-        end
-        v:bounds():move2(x, 0)
-        v:invalidate(true)
-        index = index + 1
-    end
+    self:_update_buttons_layout()
 
     -- invalidate
     self:invalidate()
@@ -113,7 +124,6 @@ end
 -- on resize
 function dialog:on_resize()
     window.on_resize(self)
-    self:buttons():bounds_set(rect:new(0, self:panel():height() - 1, self:panel():width(), 1))
 end
 
 -- return module

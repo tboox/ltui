@@ -20,11 +20,13 @@
 
 -- load modules
 local log    = require("ltui/base/log")
+local table  = require("ltui/base/table")
 local rect   = require("ltui/rect")
 local point  = require("ltui/point")
 local object = require("ltui/object")
 local canvas = require("ltui/canvas")
 local curses = require("ltui/curses")
+local action = require("ltui/action")
 
 -- define module
 local view = view or object()
@@ -232,6 +234,9 @@ function view:on_resize()
 
     -- clear mark
     self:state_set("resize", false)
+    
+    -- do action
+    self:action_on(action.ac_on_resized)
 end
 
 -- show view?
@@ -349,20 +354,21 @@ function view:extra_set(name, value)
     return self
 end
 
--- get action
-function view:action(name)
-    return self._ACTIONS[name]
-end
-
 -- set action
 function view:action_set(name, on_action)
     self._ACTIONS[name] = on_action
     return self
 end
 
+-- add action
+function view:action_add(name, on_action)
+    self._ACTIONS[name] = table.join(table.wrap(self._ACTIONS[name]), on_action)
+    return self
+end
+
 -- do action
 function view:action_on(name, ...)
-    local on_action = self:action(name)
+    local on_action = self._ACTIONS[name]
     if on_action then
         if type(on_action) == "string" then
             -- send command
@@ -372,6 +378,13 @@ function view:action_on(name, ...)
         elseif type(on_action) == "function" then
             -- do action script
             return on_action(self, ...)
+        elseif type(on_action) == "table" then
+            for _, on_action_val in ipairs(on_action) do
+                -- we cannot uses the return value of action for multi-actions
+                if type(on_action_val) == "function" then
+                    on_action_val(self, ...)
+                end
+            end
         end
     end
 end

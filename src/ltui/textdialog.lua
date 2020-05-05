@@ -25,6 +25,7 @@ local event    = require("ltui/event")
 local dialog   = require("ltui/dialog")
 local curses   = require("ltui/curses")
 local textarea = require("ltui/textarea")
+local action   = require("ltui/action")
 
 -- define module
 local textdialog = textdialog or dialog()
@@ -40,6 +41,11 @@ function textdialog:init(name, bounds, title)
 
     -- select buttons by default
     self:panel():select(self:buttons())
+
+    -- on resize for panel
+    self:panel():action_add(action.ac_on_resized, function (v)
+        self:text():bounds_set(rect:new(0, 0, v:width(), v:height() - 1))
+    end)
 end
 
 -- get text
@@ -67,7 +73,6 @@ end
 -- on resize
 function textdialog:on_resize()
     dialog.on_resize(self)
-    self:text():bounds_set(rect:new(0, 0, self:panel():width(), self:panel():height() - 1))
 end
 
 -- return module
