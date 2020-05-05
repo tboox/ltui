@@ -316,6 +316,10 @@ function mconfdialog:on_resize()
     self:inputdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
     self:choicedialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(20, self:height())})
     self:searchdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
+    self:center(self:resultdialog(), {centerx = true, centery = true})
+    self:center(self:inputdialog(), {centerx = true, centery = true})
+    self:center(self:choicedialog(), {centerx = true, centery = true})
+    self:center(self:searchdialog(), {centerx = true, centery = true})
     boxdialog.on_resize(self)
 end
 
