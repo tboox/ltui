@@ -64,5 +64,11 @@ function textdialog:on_event(e)
     end
 end
 
+-- on resize
+function textdialog:on_resize()
+    dialog.on_resize(self)
+    self:text():bounds_set(rect:new(0, 0, self:panel():width(), self:panel():height() - 1))
+end
+
 -- return module
 return textdialog

@@ -42,8 +42,22 @@ function demo:init()
     -- init background
     self:background_set("blue")
 
-    -- init main window
-    self:insert(window:new("window.main", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true))
+    -- init body window
+    self:insert(self:body_window())
+end
+
+-- get body window
+function demo:body_window()
+    if not self._BODY_WINDOW then
+        self._BODY_WINDOW = window:new("window.body", rect {1, 1, self:width() - 1, self:height() - 1}, "main window", true)
+    end
+    return self._BODY_WINDOW
+end
+
+-- on resize
+function demo:on_resize()
+    self:body_window():bounds_set(rect {1, 1, self:width() - 1, self:height() - 1})
+    application.on_resize(self)
 end
 
 -- run demo

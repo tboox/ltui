@@ -70,5 +70,11 @@ function boxdialog:box()
     return self._BOX
 end
 
+-- on resize
+function boxdialog:on_resize()
+    textdialog.on_resize(self)
+    self:box():bounds_set(rect{0, 3, self:panel():width(), self:panel():height() - 1})
+end
+
 -- return module
 return boxdialog

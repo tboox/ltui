@@ -169,7 +169,7 @@ end
 function view:draw(transparent)
 
     -- trace
-    log:print("%s: draw ..", self)
+    log:print("%s: draw (transparent: %s) ..", self, tostring(transparent))
 
     -- draw background
     if not transparent then

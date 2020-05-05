@@ -110,5 +110,11 @@ function dialog:on_event(e)
     return window.on_event(self, e)
 end
 
+-- on resize
+function dialog:on_resize()
+    window.on_resize(self)
+    self:buttons():bounds_set(rect:new(0, self:panel():height() - 1, self:panel():width(), 1))
+end
+
 -- return module
 return dialog
