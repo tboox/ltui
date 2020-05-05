@@ -61,8 +61,8 @@ function view:init(name, bounds)
     state.selected       = false     -- is selected?
     state.focused        = false     -- is focused?
     state.redraw         = true      -- need redraw 
-    state.on_refresh        = true      -- need refresh
-    state.on_resize         = true      -- need resize
+    state.on_refresh     = true      -- need refresh
+    state.on_resize      = true      -- need resize
     self._STATE          = state
 
     -- init options
@@ -93,8 +93,8 @@ end
 function view:exit()
 
     -- close window
-    if self:window() then
-        self:window():close()
+    if self._WINDOW then
+        self._WINDOW:close()
         self._WINDOW = nil
     end
 end
@@ -156,6 +156,15 @@ end
 
 -- get the view window
 function view:window()
+    if not self._WINDOW then
+
+        -- create window
+        self._WINDOW = curses.new_pad(self:height() > 0 and self:height() or 1, self:width() > 0 and self:width() or 1)
+        assert(self._WINDOW, "cannot create window!")
+
+        -- disable cursor
+        self._WINDOW:leaveok(true)
+    end
     return self._WINDOW
 end
 
@@ -217,20 +226,13 @@ function view:on_resize()
     log:print("%s: resize ..", self)
 
     -- close the previous windows first
-    if self:window() then
-        self:window():close()
+    if self._WINDOW then
+        self._WINDOW:close()
         self._WINDOW = nil
     end
 
     -- need renew canvas
     self._CANVAS = nil
-
-    -- create a new window
-    self._WINDOW = curses.new_pad(self:height() > 0 and self:height() or 1, self:width() > 0 and self:width() or 1)
-    assert(self._WINDOW, "cannot create window!")
-
-    -- disable cursor
-    self:window():leaveok(true)
 
     -- clear mark
     self:state_set("resize", false)

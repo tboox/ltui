@@ -126,6 +126,7 @@ end
 -- on resize  
 function demo:on_resize()
     self:dialog_main():bounds_set(rect {1, 1, self:width() - 1, self:height() - 1})
+    self:dialog_help():bounds_set(rect {1, 1, self:width() - 1, self:height() - 1})
     self:center(self:dialog_input(), {centerx = true, centery = true})
     self:center(self:dialog_tips(), {centerx = true, centery = true})
     application.on_resize(self)
