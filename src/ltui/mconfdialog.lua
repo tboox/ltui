@@ -311,15 +311,25 @@ end
 
 -- on resize
 function mconfdialog:on_resize()
-    self:helpdialog():bounds_set(self:bounds())
-    self:resultdialog():bounds_set(self:bounds())
-    self:inputdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
-    self:choicedialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(20, self:height())})
-    self:searchdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
-    self:center(self:resultdialog(), {centerx = true, centery = true})
-    self:center(self:inputdialog(), {centerx = true, centery = true})
-    self:center(self:choicedialog(), {centerx = true, centery = true})
-    self:center(self:searchdialog(), {centerx = true, centery = true})
+    if self._HELPDIALOG then
+        self:helpdialog():bounds_set(self:bounds())
+    end
+    if self._RESULTDIALOG then
+        self:resultdialog():bounds_set(self:bounds())
+        self:center(self:resultdialog(), {centerx = true, centery = true})
+    end
+    if self._INPUTDIALOG then
+        self:inputdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
+        self:center(self:inputdialog(), {centerx = true, centery = true})
+    end
+    if self._CHOICEDIALOG then
+        self:choicedialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(20, self:height())})
+        self:center(self:choicedialog(), {centerx = true, centery = true})
+    end
+    if self._SEARCHDIALOG then
+        self:searchdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
+        self:center(self:searchdialog(), {centerx = true, centery = true})
+    end
     boxdialog.on_resize(self)
 end
 
