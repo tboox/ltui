@@ -74,10 +74,5 @@ function inputdialog:textedit()
     return self._TEXTEDIT
 end
 
--- on resize
-function inputdialog:on_resize()
-    textdialog.on_resize(self)
-end
-
 -- return module
 return inputdialog

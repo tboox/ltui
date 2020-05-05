@@ -121,10 +121,5 @@ function dialog:on_event(e)
     return window.on_event(self, e)
 end
 
--- on resize
-function dialog:on_resize()
-    window.on_resize(self)
-end
-
 -- return module
 return dialog

@@ -70,10 +70,5 @@ function textdialog:on_event(e)
     end
 end
 
--- on resize
-function textdialog:on_resize()
-    dialog.on_resize(self)
-end
-
 -- return module
 return textdialog

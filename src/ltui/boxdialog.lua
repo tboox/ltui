@@ -59,6 +59,11 @@ function boxdialog:init(name, bounds, title)
 
     -- select buttons by default
     self:panel():select(self:buttons())
+
+    -- on resize for panel
+    self:panel():action_add(action.ac_on_resized, function (v)
+        self:box():bounds_set(rect{0, 3, v:width(), v:height() - 1})
+    end)
 end
 
 -- get box
@@ -68,12 +73,6 @@ function boxdialog:box()
         self._BOX:border():cornerattr_set("black", "white")
     end
     return self._BOX
-end
-
--- on resize
-function boxdialog:on_resize()
-    self:box():bounds_set(rect{0, 3, self:panel():width(), self:panel():height() - 1})
-    textdialog.on_resize(self)
 end
 
 -- return module
