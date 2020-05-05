@@ -55,6 +55,10 @@ Pressing <Y> includes, <N> excludes. Enter <Esc> or <Back> to go back, <?> for H
 
     -- insert menu config
     self:box():panel():insert(self:menuconf())
+    self:box():panel():action_add(action.ac_on_resized, function (v)
+        local bounds = self:box():panel():bounds()
+        self:menuconf():bounds_set(rect:new(0, 0, bounds:width(), bounds:height()))
+    end)
 
     -- disable to select to box (disable Tab switch and only response to buttons)
     self:box():option_set("selectable", false)
@@ -135,7 +139,7 @@ end
 -- get input dialog
 function mconfdialog:inputdialog()
     if not self._INPUTDIALOG then
-        local dialog_input = inputdialog:new("mconfdialog.input", rect {0, 0, math.min(80, self:width() - 8), math.min(8, self:height())}, "input dialog")
+        local dialog_input = inputdialog:new("mconfdialog.input", rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())}, "input dialog")
         dialog_input:background_set(self:frame():background())
         dialog_input:frame():background_set("cyan")
         dialog_input:textedit():option_set("multiline", false)
@@ -163,7 +167,7 @@ end
 -- get choice dialog
 function mconfdialog:choicedialog()
     if not self._CHOICEDIALOG then
-        local dialog_choice = choicedialog:new("mconfdialog.choice", rect {0, 0, math.min(80, self:width() - 8), math.min(20, self:height())}, "input dialog")
+        local dialog_choice = choicedialog:new("mconfdialog.choice", rect{0, 0, math.min(80, self:width() - 8), math.min(20, self:height())}, "input dialog")
         dialog_choice:background_set(self:frame():background())
         dialog_choice:frame():background_set("cyan")
         dialog_choice:box():frame():background_set("cyan")
@@ -175,7 +179,7 @@ end
 -- get search dialog
 function mconfdialog:searchdialog()
     if not self._SEARCHDIALOG then
-        local dialog_search = inputdialog:new("mconfdialog.input", rect {0, 0, math.min(80, self:width() - 8), math.min(8, self:height())}, "Search Configuration Parameter")
+        local dialog_search = inputdialog:new("mconfdialog.input", rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())}, "Search Configuration Parameter")
         dialog_search:background_set(self:frame():background())
         dialog_search:frame():background_set("cyan")
         dialog_search:textedit():option_set("multiline", false)
@@ -303,6 +307,16 @@ function mconfdialog:on_event(e)
         end
     end
     return boxdialog.on_event(self, e) 
+end
+
+-- on resize
+function mconfdialog:on_resize()
+    self:helpdialog():bounds_set(self:bounds())
+    self:resultdialog():bounds_set(self:bounds())
+    self:inputdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
+    self:choicedialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(20, self:height())})
+    self:searchdialog():bounds_set(rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())})
+    boxdialog.on_resize(self)
 end
 
 -- return module
