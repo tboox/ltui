@@ -139,8 +139,15 @@ function panel:insert(v, opt)
         self:select(v)
     end
 
+    -- @note we need force to trigger on_resize for this panel for 
+    -- passing on_resize event to this subview if this subview has been resized?
+    local resize = false
+    if v:state("resize") and not self:state("resize") then
+        resize = true
+    end
+
     -- invalidate it
-    self:invalidate()
+    self:invalidate(resize)
 end
 
 -- remove view
