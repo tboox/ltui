@@ -3,11 +3,8 @@
   <h1>LTUI</h1>
 
   <div>
-    <a href="https://travis-ci.org/tboox/ltui">
-      <img src="https://img.shields.io/travis/tboox/ltui/master.svg?style=flat-square" alt="travis-ci" />
-    </a>
-    <a href="https://ci.appveyor.com/project/waruqi/ltui/branch/master">
-      <img src="https://img.shields.io/appveyor/ci/waruqi/ltui/master.svg?style=flat-square" alt="appveyor-ci" />
+    <a href="https://github.com/tboox/ltui/actions?query=workflow%3Abuild">
+      <img src="https://img.shields.io/github/workflow/status/tboox/ltui/build/master.svg?style=flat-square" alt="github-ci" />
     </a>
     <a href="https://github.com/tboox/ltui/releases">
       <img src="https://img.shields.io/github/release/tboox/ltui.svg?style=flat-square" alt="Github All Releases" />
