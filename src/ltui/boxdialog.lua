@@ -52,12 +52,6 @@ function boxdialog:init(name, bounds, title)
             if lines > 0 and lines < self:height() then
                 self._TEXT_EY = lines
                 self:panel():invalidate(true)
-                --[[
-                self:box():bounds().sy = lines
-                self:text():bounds().ey = lines
-                self:box():invalidate(true)
-                self:text():invalidate(true)
-                ]]
             end
         end
     end)
