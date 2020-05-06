@@ -61,110 +61,6 @@ function table.join2(self, ...)
     return self
 end
 
--- append all objects to array
-function table.append(array, ...)
-    for _, value in ipairs({...}) do
-        table.insert(array, value)
-    end
-    return array
-end
-
--- copy the table to self
-function table.copy(copied)
-
-    -- init it
-    copied = copied or {}
-
-    -- copy it
-    local result = {}
-    for k, v in pairs(table.wrap(copied)) do
-        result[k] = v
-    end
-
-    -- ok
-    return result
-end
-
--- copy the table to self
-function table.copy2(self, copied)
-
-    -- check
-    assert(self)
-
-    -- init it
-    copied = copied or {}
-
-    -- clear self first
-    table.clear(self)
-
-    -- copy it
-    for k, v in pairs(table.wrap(copied)) do
-        self[k] = v
-    end
-
-end
-
--- inherit interfaces and create a new instance
-function table.inherit(...)
-
-    -- init instance
-    local classes = {...}
-    local instance = {}
-    local metainfo = {}
-    for _, clasz in ipairs(classes) do
-        for k, v in pairs(clasz) do
-            if type(v) == "function" then
-                if k:startswith("__") then
-                    if metainfo[k] == nil then
-                        metainfo[k] = v
-                    end
-                else
-                    if instance[k] == nil then
-                        instance[k] = v
-                    else
-                        instance["_super_" .. k] = v
-                    end
-                end
-            end
-        end
-    end
-    setmetatable(instance, metainfo)
-
-    -- ok?
-    return instance
-end
-
--- inherit interfaces from the given class
-function table.inherit2(self, ...)
-
-    -- check
-    assert(self)
-
-    -- init instance
-    local classes = {...}
-    local metainfo = getmetatable(self) or {}
-    for _, clasz in ipairs(classes) do
-        for k, v in pairs(clasz) do
-            if type(v) == "function" then
-                if k:startswith("__") then
-                    if metainfo[k] == nil then
-                        metainfo[k] = v
-                    end
-                else
-                    if self[k] == nil then
-                        self[k] = v
-                    else 
-                        self["_super_" .. k] = v
-                    end
-                end
-            end
-        end
-    end
-
-    -- ok?
-    return self
-end
-
 -- slice table array
 function table.slice(self, first, last, step)
 
@@ -184,86 +80,6 @@ end
 -- is dictionary?
 function table.is_dictionary(dict)
     return type(dict) == "table" and dict[1] == nil
-end
-
--- dump it with the level
-function table._dump(self, exclude, level)
- 
-    -- dump basic type
-    if type(self) == "string" or type(self) == "boolean" or type(self) == "number" then  
-        io.write(tostring(self))  
-    elseif type(self) == "table" and (getmetatable(self) or {}).__tostring then
-        io.write(tostring(self))  
-    -- dump table
-    elseif type(self) == "table" then  
-
-        -- dump head
-        io.write("\n")  
-        for l = 1, level do
-            io.write("    ")
-        end
-        io.write("{\n")
-
-        -- dump body
-        local i = 0
-        for k, v in pairs(self) do  
-
-            -- exclude some keys
-            if not exclude or type(k) ~= "string" or not k:find(exclude) then
-
-                -- dump spaces and separator
-                for l = 1, level do
-                    io.write("    ")
-                end
-
-                if i == 0 then
-                    io.write("    ")
-                else
-                    io.write(",   ")
-                end
-                
-                -- dump key
-                if type(k) == "string" then
-                    io.write(k, " = ")  
-                end
-
-                -- dump value
-                table._dump(v, exclude, level + 1)  
-
-                -- dump newline
-                io.write("\n")
-                i = i + 1
-            end
-        end  
-
-        -- dump tail
-        for l = 1, level do
-            io.write("    ")
-        end
-        io.write("}\n")  
-    elseif self ~= nil then
-        io.write("<" .. tostring(self) .. ">")
-    else
-        io.write("nil")
-    end
-end
-
--- dump it
-function table.dump(self, exclude, prefix)
-
-    -- dump prefix
-    if prefix then
-        io.write(prefix)
-    end
-  
-    -- dump it
-    table._dump(self, exclude, 0)
-
-    -- end
-    print("")
-
-    -- return it
-    return self
 end
 
 -- unwrap object if be only one
@@ -334,6 +150,83 @@ function table.unique(array, barrier)
 
     -- ok
     return array
+end
+
+-- pack arguments into a table
+-- polyfill of lua 5.2, @see https://www.lua.org/manual/5.2/manual.html#pdf-table.pack
+function table.pack(...)
+    return { n = select("#", ...), ... }
+end
+
+-- unpack table values
+-- polyfill of lua 5.2, @see https://www.lua.org/manual/5.2/manual.html#pdf-table.unpack
+table.unpack = unpack
+
+-- get keys of a table
+function table.keys(tab)
+
+    assert(tab)
+
+    local keyset = {}
+    local n = 0
+    for k, _ in pairs(tab) do
+        n = n + 1
+        keyset[n] = k
+    end
+    return keyset, n
+end
+
+-- get values of a table
+function table.values(tab)
+
+    assert(tab)
+
+    local valueset = {}
+    local n = 0
+    for _, v in pairs(tab) do
+        n = n + 1
+        valueset[n] = v
+    end
+    return valueset, n
+end
+
+-- map values to a new table
+function table.map(tab, mapper)
+
+    assert(tab)
+    assert(mapper)
+
+    local newtab = {}
+    for k, v in pairs(tab) do
+        newtab[k] = mapper(k, v)
+    end
+    return newtab
+end
+
+-- map values to a new array
+function table.imap(arr, mapper)
+
+    assert(arr)
+    assert(mapper)
+
+    local newarr = {}
+    for k, v in ipairs(arr) do
+        table.insert(newarr, mapper(k, v))
+    end
+    return newarr
+end
+
+-- reverse table values
+function table.reverse(arr)
+
+    assert(arr)
+
+    local revarr = {}
+    local l = #arr
+    for i = 1, l do
+        revarr[i] = arr[l - i + 1]
+    end
+    return revarr
 end
 
 -- return module: table

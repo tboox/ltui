@@ -19,12 +19,12 @@
 --
 
 -- load modules
-local log    = require("ltui/base/log")
-local rect   = require("ltui/rect")
-local point  = require("ltui/point")
-local panel  = require("ltui/panel")
-local event  = require("ltui/event")
-local curses = require("ltui/curses")
+local log     = require("ltui/base/log")
+local rect    = require("ltui/rect")
+local point   = require("ltui/point")
+local panel   = require("ltui/panel")
+local event   = require("ltui/event")
+local curses  = require("ltui/curses")
 
 -- define module
 local program = program or panel()

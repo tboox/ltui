@@ -51,7 +51,7 @@ function boxdialog:init(name, bounds, title)
             local lines = #self:text():splitext(v:text())
             if lines > 0 and lines < self:height() then
                 self._TEXT_EY = lines
-                self:invalidate(true)
+                self:panel():invalidate(true)
                 --[[
                 self:box():bounds().sy = lines
                 self:text():bounds().ey = lines
