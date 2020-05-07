@@ -52,7 +52,7 @@ function rect:height()
 end
 
 -- resize rect
-function rect:on_resize(w, h)
+function rect:resize(w, h)
     self.ex = self.sx + w
     self.ey = self.sy + h
 end

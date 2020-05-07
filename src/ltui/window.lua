@@ -59,7 +59,7 @@ function window:init(name, bounds, title, shadow)
         self:title():action_set(action.ac_on_text_changed, function (v)
             if v:text() then
                 local bounds = v:bounds()
-                v:bounds():on_resize(#v:text(), v:height())
+                v:bounds():resize(#v:text(), v:height())
                 bounds:move2(math.max(0, math.floor((self:frame():width() - v:width()) / 2)), bounds.sy)
                 v:invalidate(true)
             end
