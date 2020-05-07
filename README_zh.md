@@ -171,6 +171,14 @@ end
 
 <img src="https://tboox.org/static/img/ltui/textarea.png" width="70%" />
 
+#### Windows
+
+<img src="https://tboox.org/static/img/ltui/windows.png" width="70%" />
+
+#### Termux
+
+<img src="https://tboox.org/static/img/ltui/termux.jpeg" width="40%" />
+
 
 如果你想了解更多，请参考：
 
