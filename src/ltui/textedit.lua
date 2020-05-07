@@ -50,10 +50,10 @@ function textedit:init(name, bounds, text)
 end
 
 -- draw textedit
-function textedit:draw(transparent)
+function textedit:on_draw(transparent)
 
     -- draw label
-    textarea.draw(self, transparent)
+    textarea.on_draw(self, transparent)
 
     -- move cursor
     if not self:text() or #self:text() == 0 then

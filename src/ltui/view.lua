@@ -177,7 +177,7 @@ function view:canvas()
 end
 
 -- draw view
-function view:draw(transparent)
+function view:on_draw(transparent)
 
     -- trace
     log:print("%s: draw (transparent: %s) ..", self, tostring(transparent))

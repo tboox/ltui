@@ -39,10 +39,10 @@ function border:init(name, bounds)
 end
 
 -- draw border
-function border:draw(transparent)
+function border:on_draw(transparent)
 
     -- draw background (transparent)
-    view.draw(self, true)
+    view.on_draw(self, true)
 
     -- get corner attribute
     local cornerattr = self:cornerattr()

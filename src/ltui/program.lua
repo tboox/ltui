@@ -232,7 +232,7 @@ function program:loop(argv)
         end
 
         -- draw views
-        self:draw()
+        self:on_draw()
 
         -- refresh views
         if self:state("refresh") then

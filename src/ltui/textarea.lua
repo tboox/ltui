@@ -46,10 +46,10 @@ function textarea:init(name, bounds, text)
 end
 
 -- draw textarea
-function textarea:draw(transparent)
+function textarea:on_draw(transparent)
 
     -- draw background
-    view.draw(self, transparent)
+    view.on_draw(self, transparent)
 
     -- get the text attribute value
     local textattr = self:textattr_val()

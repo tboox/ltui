@@ -280,7 +280,7 @@ function panel:on_event(e)
  
     -- select view?
     if e.type == event.ev_keyboard then
-        if e.key_name == "Right" then
+        if e.key_name == "Right" or e.key_name == "Tab" then
             return self:select_next()
         elseif e.key_name == "Left" then
             return self:select_prev()
@@ -298,14 +298,14 @@ function panel:state_set(name, enable)
 end
 
 -- draw panel 
-function panel:draw(transparent)
+function panel:on_draw(transparent)
 
     -- redraw panel?
     local redraw = self:state("redraw")
 
     -- draw panel background first
     if redraw then
-        view.draw(self, transparent)
+        view.on_draw(self, transparent)
     end
 
     -- draw all child views
@@ -314,7 +314,7 @@ function panel:draw(transparent)
             v:state_set("redraw", true)
         end
         if v:state("visible") and (v:state("redraw") or v:type() == "panel") then
-            v:draw(transparent)
+            v:on_draw(transparent)
         end
     end
 end
