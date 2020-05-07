@@ -20,6 +20,7 @@
 
 -- load modules
 local log          = require("ltui/base/log")
+local table        = require("ltui/base/table")
 local rect         = require("ltui/rect")
 local event        = require("ltui/event")
 local action       = require("ltui/action")
