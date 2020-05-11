@@ -105,7 +105,7 @@ target("ltui")
 
     -- add lua and do not link it on linux and macos
     local lualinks = nil
-    if is_plat("macosx") then
+    if is_plat("macosx", "linux", "bsd") then
         lualinks = {} 
     end
     if has_config("luajit") then
@@ -126,6 +126,8 @@ target("ltui")
     -- dynamic lookup liblua symbols
     if is_plat("macosx") then
         add_shflags("-undefined dynamic_lookup")
+    elseif is_plat("linux", "bsd") then
+        add_shflags("-undefined suppress")
     end
 
 -- add projects
