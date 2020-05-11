@@ -105,7 +105,7 @@ target("ltui")
 
     -- add lua and do not link it on linux and macos
     local lualinks = nil
-    if not is_plat("windows") then
+    if is_plat("macosx") then
         lualinks = {} 
     end
     if has_config("luajit") then
