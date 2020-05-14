@@ -69,6 +69,11 @@ function panel:first()
     return self._VIEWS:first()
 end
 
+-- get the last view
+function panel:last()
+    return self._VIEWS:last()
+end
+
 -- get the next view
 function panel:next(v)
     return self._VIEWS:next(v)
@@ -280,7 +285,10 @@ function panel:on_event(e)
  
     -- select view?
     if e.type == event.ev_keyboard then
-        if e.key_name == "Right" or e.key_name == "Tab" then
+        -- @note we also use '-' to switch them on termux without right/left and 
+        -- we cannot use tab, because we still need swith views on windows. e.g. inputdialog
+        -- @see https://github.com/tboox/ltui/issues/11
+        if e.key_name == "Right" or e.key_name == "-" then
             return self:select_next()
         elseif e.key_name == "Left" then
             return self:select_prev()
