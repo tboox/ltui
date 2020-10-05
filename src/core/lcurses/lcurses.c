@@ -779,16 +779,6 @@ lc_ungetmouse(lua_State *L)
 	return 1;
 }
 
-/***
-Get a new mouse event
-@function getmouse
-@treturn unsigned long `bstate`, button state
-@treturn int `x`, x coordinate
-@treturn int `y`, y coordinate
-@treturn int `z`, z coordinate
-@treturn short `id`, ID to distinguish multiple devices
-@see getmouse(3x)
-*/
 static int
 lc_getmouse(lua_State *L)
 {
@@ -807,14 +797,6 @@ lc_getmouse(lua_State *L)
 	return 1;
 }
 
-/***
-Set a new mouse mask
-@function mousemask
-@unsigned long `new_mask`, the new mask of mouse events
-@treturn unsigned long `mask`, with the mask of reported events
-@treturn unsigned long `oldmask`, with the previous mouse mask
-@see mousemask(3x)
-*/
 static int
 lc_mousemask(lua_State *L)
 {
@@ -826,14 +808,6 @@ lc_mousemask(lua_State *L)
 	return 2;
 }
 
-/***
-Sets the maximum time (in thousands of a second) that can elapse
-between press and release events for them to be recognized as a click.
-@function mouseinterval
-@int time, the next time to be set or nothing to get the actual.
-@treturn int returns the previous interval time
-@see mouseinterval(3x)
-*/
 static int
 lc_mouseinterval(lua_State *L)
 {
@@ -844,12 +818,6 @@ lc_mouseinterval(lua_State *L)
 	return 1;
 }
 
-/***
-Is the mouse driver initialized
-@function has_mouse
-@treturn bool `true`
-@see has_mouse(3x)
-*/
 static int
 lc_has_mouse(lua_State *L)
 {
