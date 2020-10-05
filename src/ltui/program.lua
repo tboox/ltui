@@ -44,6 +44,11 @@ function program:init(name, argv)
     -- disable newline
     curses.nl(false)
 
+    -- init mouse support
+    if curses.KEY_MOUSE then
+        curses.mousemask(curses.BUTTON1_PRESSED)
+    end
+
     -- to filter characters being output to the screen
     -- this will filter all characters where a chtype or chstr is used
     curses.map_output(true)
@@ -135,6 +140,10 @@ function program:event()
     -- get input key
     local key_code, key_name, key_meta = self:_input_key()
     if key_code then
+        if key_code == curses.KEY_MOUSE then
+            local s, x, y, z, id = curses.getmouse()
+            return event.mouse{s, x, y, id}
+        end
         return event.keyboard{key_code, key_name, key_meta}
     end
 end
