@@ -46,7 +46,7 @@ function program:init(name, argv)
 
     -- init mouse support
     if curses.KEY_MOUSE then
-        curses.mousemask(curses.BUTTON1_PRESSED)
+        curses.mousemask(curses.ALL_MOUSE_EVENTS)
     end
 
     -- to filter characters being output to the screen
@@ -141,8 +141,15 @@ function program:event()
     local key_code, key_name, key_meta = self:_input_key()
     if key_code then
         if curses.KEY_MOUSE and key_code == curses.KEY_MOUSE then
-            local s, x, y, z, id = curses.getmouse()
-            return event.mouse{s, x, y, id}
+            local s, x, y = curses.getmouse()
+            local name
+            for n, v in pairs(curses) do
+                if v == s and n:match('BUTTON') then
+                    name = n or name
+                    break
+                end
+            end
+            return event.mouse{s, x, y, name}
         end
         return event.keyboard{key_code, key_name, key_meta}
     end

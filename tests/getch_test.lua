@@ -78,7 +78,7 @@ function demo:on_event(e)
 		self:teste():text_set('tp: ' ..
 			   tostring(e.type) ..
 			   '; name: ' ..
-			   tostring(e.key_name or e.bstate) ..
+			   tostring(e.key_name or e.btn_name) ..
 			   '; code: ' ..
 			   tostring(e.key_code or e.x) ..
 			   '; meta: ' ..
