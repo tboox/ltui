@@ -768,33 +768,33 @@ LC_NUMBER2(LINES, LINES)
 static int
 lc_ungetmouse(lua_State *L)
 {
-MEVENT e;
-e.bstate = luaL_checklong(L, 1);
-e.x = luaL_checkint(L, 2);
-e.y = luaL_checkint(L, 3);
-e.z = luaL_checkint(L, 4);
-e.id = luaL_checkint(L, 5);
+    MEVENT e;
+    e.bstate = luaL_checklong(L, 1);
+    e.x = luaL_checkint(L, 2);
+    e.y = luaL_checkint(L, 3);
+    e.z = luaL_checkint(L, 4);
+    e.id = luaL_checkint(L, 5);
 
-lua_pushboolean(L, !(!ungetmouse(&e)));
-return 1;
+    lua_pushboolean(L, !(!ungetmouse(&e)));
+    return 1;
 }
 
 static int
 lc_getmouse(lua_State *L)
 {
-MEVENT e;
-if (getmouse(&e) == OK)
-{
-    lua_pushinteger(L, e.bstate);
-    lua_pushinteger(L, e.x);
-    lua_pushinteger(L, e.y);
-    lua_pushinteger(L, e.z);
-    lua_pushinteger(L, e.id);
-    return 5;
-}
+    MEVENT e;
+    if (getmouse(&e) == OK)
+    {
+        lua_pushinteger(L, e.bstate);
+        lua_pushinteger(L, e.x);
+        lua_pushinteger(L, e.y);
+        lua_pushinteger(L, e.z);
+        lua_pushinteger(L, e.id);
+        return 5;
+    }
 
-lua_pushnil(L);
-return 1;
+    lua_pushnil(L);
+    return 1;
 }
 
 static int
