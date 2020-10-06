@@ -350,7 +350,7 @@ function program:_mouse_map()
         -- on curses implementation
         self._MOUSEMAP = {}
         for n, v in pairs(curses) do
-            if n:match('MOUSE') and n ~= 'KEY_MOUSE' or n:match('BUTTON') then
+            if (n:match('MOUSE') and n ~= 'KEY_MOUSE') or n:match('BUTTON') then
                 self._MOUSEMAP[v] = n
             end
         end
