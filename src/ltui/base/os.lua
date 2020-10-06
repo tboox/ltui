@@ -11,7 +11,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
--- 
+--
 -- Copyright (C) 2015-2020, TBOOX Open Source Group.
 --
 -- @author      ruki
@@ -72,7 +72,7 @@ function os.host()
         elseif package.config:sub(1, 1) == '\\' then
             os._HOST = "windows"
         else
-            local result = os.iorun("uname") 
+            local result = os.iorun("uname")
             if result then
                 if result:lower():find("linux", 1, true) then
                     os._HOST = "linux"

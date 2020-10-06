@@ -15,7 +15,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
--- 
+--
 -- Copyright (C) 2020, TBOOX Open Source Group.
 --
 -- @author      Lael N. Santos
@@ -37,7 +37,7 @@ local demo = application()
 -- init demo
 function demo:init()
 
-    -- init name 
+    -- init name
     application.init(self, "demo")
 
     -- init background
@@ -74,7 +74,7 @@ end
 
 -- on event
 function demo:on_event(e)
-    if e.type < event.ev_max then 
+    if e.type < event.ev_max then
         self:teste():text_set('type: ' ..
             tostring(e.type) ..
             '; name: ' ..

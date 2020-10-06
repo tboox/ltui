@@ -11,7 +11,7 @@
 -- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
--- 
+--
 -- Copyright (C) 2015-2020, TBOOX Open Source Group.
 --
 -- @author      ruki
@@ -22,7 +22,7 @@
 local string = string or {}
 
 -- match the start string
-function string:startswith(str) 
+function string:startswith(str)
     return self:find('^' .. str) ~= nil
 end
 
@@ -96,7 +96,7 @@ function string:append(substr, separator)
     else
         s = string.format("%s%s%s", s, separator or "", substr)
     end
-    
+
     -- ok
     return s
 end
@@ -152,7 +152,7 @@ function string.tryformat(format, ...)
     end
 end
 
--- case-insensitive pattern-matching 
+-- case-insensitive pattern-matching
 --
 -- print(("src/dadasd.C"):match(string.ipattern("sR[cd]/.*%.c", true)))
 -- print(("src/dadasd.C"):match(string.ipattern("src/.*%.c", true)))
@@ -167,7 +167,7 @@ function string.ipattern(pattern, brackets)
     local tmp = {}
     local i = 1
     while i <= #pattern do
-        
+
         -- get current charactor
         local char = pattern:sub(i, i)
 
@@ -184,7 +184,7 @@ function string.ipattern(pattern, brackets)
                 i = i + 2
             end
         -- brackets?
-        elseif char == '[' then 
+        elseif char == '[' then
             tmp[#tmp + 1] = char
             i = i + 1
             while i <= #pattern do
@@ -193,12 +193,12 @@ function string.ipattern(pattern, brackets)
                     tmp[#tmp + 1] = char
                     tmp[#tmp + 1] = pattern:sub(i + 1, i + 1)
                     i = i + 1
-                elseif char:match("%a") then 
+                elseif char:match("%a") then
                     tmp[#tmp + 1] = not brackets and char or char:lower() .. char:upper()
-                else 
+                else
                     tmp[#tmp + 1] = char
                 end
-                if char == ']' then break end 
+                if char == ']' then break end
                 i = i + 1
             end
         -- letter, [aA]

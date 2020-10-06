@@ -29,8 +29,8 @@ set_strip("all")
 add_cxflags("-fomit-frame-pointer")
 
 -- for the windows platform (msvc)
-if is_plat("windows") then 
-    add_cxflags("-MT") 
+if is_plat("windows") then
+    add_cxflags("-MT")
     add_defines("_CRT_SECURE_NO_WARNINGS")
     add_shflags("-nodefaultlib:msvcrt.lib")
     add_links("kernel32", "user32", "gdi32", "advapi32")
@@ -106,7 +106,7 @@ target("ltui")
     -- add lua and do not link it on linux and macos
     local lualinks = nil
     if is_plat("macosx", "linux", "bsd") then
-        lualinks = {} 
+        lualinks = {}
     end
     if has_config("luajit") then
         add_defines("LUAJIT")
@@ -114,8 +114,8 @@ target("ltui")
     else
         add_packages("lua", {links = lualinks})
     end
-  
-    -- add curses 
+
+    -- add curses
     if is_plat("windows") then
         add_defines("PDCURSES")
         add_includedirs("src/core/pdcurses")
