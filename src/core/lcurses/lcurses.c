@@ -768,61 +768,61 @@ LC_NUMBER2(LINES, LINES)
 static int
 lc_ungetmouse(lua_State *L)
 {
-	MEVENT e;
-	e.bstate = luaL_checklong(L, 1);
-	e.x = luaL_checkint(L, 2);
-	e.y = luaL_checkint(L, 3);
-	e.z = luaL_checkint(L, 4);
-	e.id = luaL_checkint(L, 5);
+MEVENT e;
+e.bstate = luaL_checklong(L, 1);
+e.x = luaL_checkint(L, 2);
+e.y = luaL_checkint(L, 3);
+e.z = luaL_checkint(L, 4);
+e.id = luaL_checkint(L, 5);
 
-	lua_pushboolean(L, !(!ungetmouse(&e)));
-	return 1;
+lua_pushboolean(L, !(!ungetmouse(&e)));
+return 1;
 }
 
 static int
 lc_getmouse(lua_State *L)
 {
-	MEVENT e;
-	if(getmouse(&e) == OK)
-	{
-		lua_pushinteger(L, e.bstate);
-		lua_pushinteger(L, e.x);
-		lua_pushinteger(L, e.y);
-		lua_pushinteger(L, e.z);
-		lua_pushinteger(L, e.id);
-		return 5;
-	}
+MEVENT e;
+if (getmouse(&e) == OK)
+{
+    lua_pushinteger(L, e.bstate);
+    lua_pushinteger(L, e.x);
+    lua_pushinteger(L, e.y);
+    lua_pushinteger(L, e.z);
+    lua_pushinteger(L, e.id);
+    return 5;
+}
 
-	lua_pushnil(L);
-	return 1;
+lua_pushnil(L);
+return 1;
 }
 
 static int
 lc_mousemask(lua_State *L)
 {
-	mmask_t m = luaL_checkint(L, 1);
-	mmask_t om;
-	m = mousemask(m, &om);
-	lua_pushinteger(L, m);
-	lua_pushinteger(L, om);
-	return 2;
+    mmask_t m = luaL_checkint(L, 1);
+    mmask_t om;
+    m = mousemask(m, &om);
+    lua_pushinteger(L, m);
+    lua_pushinteger(L, om);
+    return 2;
 }
 
 static int
 lc_mouseinterval(lua_State *L)
 {
-	if (!lua_gettop(L))
-		lua_pushinteger(L, mouseinterval(-1));
-	else
-		lua_pushinteger(L, mouseinterval(luaL_checkint(L, 1)));
-	return 1;
+    if (!lua_gettop(L))
+        lua_pushinteger(L, mouseinterval(-1));
+    else
+        lua_pushinteger(L, mouseinterval(luaL_checkint(L, 1)));
+    return 1;
 }
 
 static int
 lc_has_mouse(lua_State *L)
 {
-	lua_pushboolean(L, has_mouse());
-	return 1;
+    lua_pushboolean(L, has_mouse());
+    return 1;
 }
 #endif
 #endif

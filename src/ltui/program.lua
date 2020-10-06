@@ -141,15 +141,9 @@ function program:event()
     local key_code, key_name, key_meta = self:_input_key()
     if key_code then
         if curses.KEY_MOUSE and key_code == curses.KEY_MOUSE then
-            local s, x, y = curses.getmouse()
-            local name
-            for n, v in pairs(curses) do
-                if v == s and n:match('BUTTON') then
-                    name = n or name
-                    break
-                end
-            end
-            return event.mouse{s, x, y, name}
+            local code, x, y = curses.getmouse()
+            local name = self:_mouse_map()[code]
+            return event.mouse{code, x, y, name}
         end
         return event.keyboard{key_code, key_name, key_meta}
     end
@@ -349,6 +343,20 @@ function program:_key_map()
     return self._KEYMAP
 end
 
+-- get mouse map
+function program:_mouse_map()
+    if not self._MOUSEMAP then
+        -- must be defined dynamically since it depends
+        -- on curses implementation
+        self._MOUSEMAP = {}
+        for n, v in pairs(curses) do
+            if n:match('MOUSE') and n ~= 'KEY_MOUSE' or n:match('BUTTON') then
+                self._MOUSEMAP[v] = n
+            end
+        end
+    end
+    return self._MOUSEMAP
+end
 -- get input key
 function program:_input_key()
 
@@ -415,6 +423,7 @@ function program:_input_key()
     end
 
     -- return key info
+
     return ch, key_name, alt
 end
 

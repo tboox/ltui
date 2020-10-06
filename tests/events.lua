@@ -16,10 +16,10 @@
 -- See the License for the specific language governing permissions and
 -- limitations under the License.
 -- 
--- Copyright (C) 2015-2020, TBOOX Open Source Group.
+-- Copyright (C) 2020, TBOOX Open Source Group.
 --
--- @author      ruki
--- @file        window.lua
+-- @author      Lael N. Santos
+-- @file        events.lua
 --
 require("tests/load")
 
@@ -74,17 +74,17 @@ end
 
 -- on event
 function demo:on_event(e)
-	if e.type < event.ev_max then 
-		self:teste():text_set('tp: ' ..
-			   tostring(e.type) ..
-			   '; name: ' ..
-			   tostring(e.key_name or e.btn_name) ..
-			   '; code: ' ..
-			   tostring(e.key_code or e.x) ..
-			   '; meta: ' ..
-			   tostring(e.key_code or e.y))
-	end
-	application.on_event(self, e)
+    if e.type < event.ev_max then 
+        self:teste():text_set('type: ' ..
+            tostring(e.type) ..
+            '; name: ' ..
+            tostring(e.key_name or e.btn_name) ..
+            '; code: ' ..
+            tostring(e.key_code or e.x) ..
+            '; meta: ' ..
+            tostring(e.key_code or e.y))
+    end
+    application.on_event(self, e)
 end
 
 -- run demo
