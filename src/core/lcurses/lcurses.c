@@ -623,7 +623,7 @@ static void register_curses_constants(lua_State *L)
     CC(KEY_COPY)        CC(KEY_CREATE)      CC(KEY_END)
     CC(KEY_EXIT)        CC(KEY_FIND)        CC(KEY_HELP)
     CC(KEY_MARK)        CC(KEY_MESSAGE)
-#ifndef XCURSES
+#if !defined(XCURSES) && !defined(PDCURSES)
 #ifndef NOMOUSE
     CC(KEY_MOUSE)
 #endif
@@ -650,7 +650,7 @@ static void register_curses_constants(lua_State *L)
     CC2(KEY_F6, KEY_F(6))   CC2(KEY_F7, KEY_F(7))   CC2(KEY_F8, KEY_F(8))
     CC2(KEY_F9, KEY_F(9))   CC2(KEY_F10, KEY_F(10)) CC2(KEY_F11, KEY_F(11))
     CC2(KEY_F12, KEY_F(12))
-#ifndef XCURSES
+#if !defined(XCURSES) && !defined(PDCURSES)
 #ifndef NOMOUSE
     /* Mouse Constants */
     CC(BUTTON1_RELEASED); CC(BUTTON1_PRESSED); CC(BUTTON1_CLICKED);
@@ -763,7 +763,7 @@ LC_NUMBER2(LINES, LINES)
 ** mouse
 ** =======================================================
 */
-#ifndef XCURSES
+#if !defined(XCURSES) && !defined(PDCURSES)
 #ifndef NOMOUSE
 static int
 lc_ungetmouse(lua_State *L)
@@ -818,12 +818,6 @@ lc_mouseinterval(lua_State *L)
     return 1;
 }
 
-static int
-lc_has_mouse(lua_State *L)
-{
-    lua_pushboolean(L, has_mouse());
-    return 1;
-}
 #endif
 #endif
 
@@ -2411,11 +2405,10 @@ static const luaL_Reg curseslib[] =
     /* outopts */
     { "nl",             lc_nl           },
 
-#ifndef XCURSES
+#if !defined(XCURSES) && !defined(PDCURSES)
 #ifndef NOMOUSE
     { "mousemask",      lc_mousemask    },
     { "mouseinterval",  lc_mouseinterval},
-    { "has_mouse",      lc_has_mouse    },
     { "getmouse",       lc_getmouse     },
     { "ungetmouse",     lc_ungetmouse   },
 #endif
