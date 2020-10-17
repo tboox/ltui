@@ -1,8 +1,8 @@
 package = "ltui"
-version = "2.1-1"
+version = "2.2-1"
 source = {
     url = "git://github.com/tboox/ltui",
-    tag = "v2.1"
+    tag = "v2.2"
 }
 description = {
     detailed = [[
