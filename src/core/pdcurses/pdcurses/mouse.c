@@ -218,12 +218,14 @@ void wmouse_position(WINDOW *win, int *y, int *x)
     }
 }
 
+#ifndef NCURSES_MOUSE_VERSION
 unsigned long getmouse(void)
 {
     PDC_LOG(("getmouse() - called\n"));
 
     return SP->_trap_mbe;
 }
+#endif
 
 unsigned long getbmap(void)
 {
