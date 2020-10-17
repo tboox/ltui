@@ -36,7 +36,7 @@ PDCurses portable platform definitions list:
 #define BSDcurses       1      /* BSD Curses routines */
 #define CHTYPE_LONG     1      /* size of chtype; long */
 #ifndef NOMOUSE
-#define NCURSES_MOUSE_VERSION 2 /* Use ncurses style mouse API */
+#define NCURSES_MOUSE_VERSION   2   /* Use ncurses style mouse API */
 #endif
 
 /*----------------------------------------------------------------------*/
