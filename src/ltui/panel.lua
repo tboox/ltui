@@ -149,7 +149,7 @@ function panel:insert(v, opt)
 end
 
 -- remove view
-function panel:remove(v)
+function panel:remove(v, opt)
 
     -- check
     assert(v:parent() == self)
@@ -163,7 +163,11 @@ function panel:remove(v)
 
     -- select next view
     if self:current() == v then
-        self:select_next(nil, true)
+        if opt and opt.select_prev then
+            self:select_prev(nil, true)
+        else
+            self:select_next(nil, true)
+        end
     end
 
     -- invalidate it
