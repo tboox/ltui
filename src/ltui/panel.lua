@@ -67,7 +67,7 @@ function panel:init(name, bounds)
 
             -- try focused first
             if v:current() and v:current():bounds():contains(x, y) then
-                return v:current():action_on(ltui.action.ac_on_clicked, x, y)
+                return v:current():action_on(action.ac_on_clicked, x, y)
             end
 
             local p = v:last()

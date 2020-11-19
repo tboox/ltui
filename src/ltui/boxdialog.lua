@@ -68,7 +68,7 @@ function boxdialog:init(name, bounds, title)
     if curses.KEY_MOUSE then
 
         -- set click action
-        self:frame():action_set(ltui.action.ac_on_clicked, function (v, x, y)
+        self:frame():action_set(action.ac_on_clicked, function (v, x, y)
 
             -- return if not mouseable
             if not v:option("mouseable") then
@@ -87,7 +87,7 @@ function boxdialog:init(name, bounds, title)
                     box:bounds():contains(px, py) then
 
                 -- bypass panel
-                return box:action_on(ltui.action.ac_on_clicked, px, py)
+                return box:action_on(action.ac_on_clicked, px, py)
             end
 
             -- return true if it doesn't match any selectable view
