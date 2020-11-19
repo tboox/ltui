@@ -85,7 +85,15 @@ end
 
 -- on event
 function application:on_event(e)
-    program.on_event(self, e)
+    if (not program.on_event(self, e)) and curses.KEY_MOUSE then
+
+        -- mouse events
+        if e.type == ltui.event.ev_mouse and (
+                e.btn_name == "BUTTON1_CLICKED" or
+                e.btn_name == "BUTTON1_DOUBLE_CLICKED") then
+            self:action_on(ltui.action.ac_on_clicked, e.x, e.y)
+        end
+    end
 end
 
 -- on resize

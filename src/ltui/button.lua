@@ -38,6 +38,23 @@ function button:init(name, bounds, text, on_action)
     -- mark as selectable
     self:option_set("selectable", true)
 
+    -- mark as mouseable
+    self:option_set("mouseable", true)
+
+    -- set click action
+    self:action_set(ltui.action.ac_on_clicked, function (v)
+
+        -- return if not mouseable
+        if not v:option("mouseable") then
+            return
+        end
+
+        if v:parent()._do_select then
+            return v:parent():_do_select()
+        end
+        return v:action_on(ltui.action.ac_on_enter)
+    end)
+
     -- show cursor
     self:cursor_show(true)
 

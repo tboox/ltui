@@ -26,6 +26,7 @@ local event  = require("ltui/event")
 local point  = require("ltui/point")
 local curses = require("ltui/curses")
 local dlist  = require("ltui/base/dlist")
+local action = require("ltui/action")
 
 -- define module
 local panel = panel or view()
@@ -47,6 +48,41 @@ function panel:init(name, bounds)
 
     -- init views cache
     self._VIEWS_CACHE = {}
+
+    if curses.KEY_MOUSE then
+
+        -- mark as mouseable
+        self:option_set("mouseable", true)
+
+        -- set click action
+        self:action_set(action.ac_on_clicked, function (v, x, y)
+
+            -- return if not clickable
+            if not v:option("mouseable") then
+                return
+            end
+
+            -- get relative coordinates
+            x, y = x - v:bounds().sx, y - v:bounds().sy
+
+            -- try focused first
+            if v:current() and v:current():bounds():contains(x, y) then
+                return v:current():action_on(ltui.action.ac_on_clicked, x, y)
+            end
+
+            local p = v:last()
+            while p do
+                if p:option('selectable') and p:bounds():contains(x, y) then
+                    v:select(p)
+                    return p:action_on(action.ac_on_clicked, x, y)
+                end
+                p = v:prev(p)
+            end
+
+            -- return true if does not match any selectable view
+            return true
+        end)
+    end
 end
 
 -- get all child views

@@ -64,6 +64,36 @@ function boxdialog:init(name, bounds, title)
         self:text():bounds().ey = self._TEXT_EY
         self:box():bounds_set(rect{0, self._TEXT_EY, v:width(), v:height() - 1})
     end)
+
+    if curses.KEY_MOUSE then
+
+        -- set click action
+        self:frame():action_set(ltui.action.ac_on_clicked, function (v, x, y)
+
+            -- return if not mouseable
+            if not v:option("mouseable") then
+                return
+            end
+
+            -- get relative coordinates
+            x, y  = x - v:bounds().sx, y - v:bounds().sy
+
+            local panel, box = v:parent():panel(), v:parent():box()
+            local px, py  = x - panel:bounds().sx, y - panel:bounds().sy
+
+            -- if coordinates don't match any view try box
+            if panel:action_on(ltui.action.ac_on_clicked, x, y) and
+                    (not box:option("selectable")) and
+                    box:bounds():contains(px, py) then
+
+                -- bypass panel
+                return box:action_on(ltui.action.ac_on_clicked, px, py)
+            end
+
+            -- return true if it doesn't match any selectable view
+            return true
+        end)
+    end
 end
 
 -- get box
