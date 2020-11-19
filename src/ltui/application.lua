@@ -28,6 +28,7 @@ local program   = require("ltui/program")
 local desktop   = require("ltui/desktop")
 local menubar   = require("ltui/menubar")
 local statusbar = require("ltui/statusbar")
+local action    = require("ltui/action")
 
 -- define module
 local application = application or program()
@@ -88,10 +89,10 @@ function application:on_event(e)
     if (not program.on_event(self, e)) and curses.KEY_MOUSE then
 
         -- mouse events
-        if e.type == ltui.event.ev_mouse and (
+        if e.type == event.ev_mouse and (
                 e.btn_name == "BUTTON1_CLICKED" or
                 e.btn_name == "BUTTON1_DOUBLE_CLICKED") then
-            self:action_on(ltui.action.ac_on_clicked, e.x, e.y)
+            self:action_on(action.ac_on_clicked, e.x, e.y)
         end
     end
 end

@@ -82,16 +82,13 @@ function boxdialog:init(name, bounds, title)
             local px, py  = x - panel:bounds().sx, y - panel:bounds().sy
 
             -- if coordinates don't match any view try box
-            if panel:action_on(ltui.action.ac_on_clicked, x, y) and
+            if panel:action_on(action.ac_on_clicked, x, y) and
                     (not box:option("selectable")) and
                     box:bounds():contains(px, py) then
 
                 -- bypass panel
                 return box:action_on(action.ac_on_clicked, px, py)
             end
-
-            -- return true if it doesn't match any selectable view
-            return true
         end)
     end
 end
