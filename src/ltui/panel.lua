@@ -50,6 +50,7 @@ function panel:init(name, bounds)
     self._VIEWS_CACHE = {}
 
     -- on click action
+    self:option_set("mouseable", true)
     self:action_set(action.ac_on_clicked, function (v, x, y)
 
         -- get relative coordinates

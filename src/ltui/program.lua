@@ -189,7 +189,7 @@ function program:on_event(e)
         self:quit()
         return true
     -- mouse events
-    elseif e.type == event.ev_mouse and self:option("mouseable") then
+    elseif e.type == event.ev_mouse and curses.has_mouse() and self:option("mouseable") then
         if e.btn_name == "BUTTON1_CLICKED" or e.btn_name == "BUTTON1_DOUBLE_CLICKED" then
             self:action_on(action.ac_on_clicked, e.x, e.y)
         end

@@ -211,5 +211,10 @@ function curses.cursor_set(state)
     end
 end
 
+-- has mouse?
+function curses.has_mouse()
+    return curses.KEY_MOUSE and true or false
+end
+
 -- return module: curses
 return curses
