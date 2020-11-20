@@ -66,7 +66,6 @@ function boxdialog:init(name, bounds, title)
     end)
 
     -- on click for frame
-    self:option_set("mouseable", true)
     self:frame():action_set(action.ac_on_clicked, function (v, x, y)
 
         -- get relative coordinates
