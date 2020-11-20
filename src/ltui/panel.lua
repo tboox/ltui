@@ -69,6 +69,7 @@ function panel:init(name, bounds)
                     v:select(p)
                     return p:action_on(action.ac_on_clicked, x, y)
                 end
+                return true
             end
             p = v:prev(p)
         end
