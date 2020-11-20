@@ -28,7 +28,6 @@ local program   = require("ltui/program")
 local desktop   = require("ltui/desktop")
 local menubar   = require("ltui/menubar")
 local statusbar = require("ltui/statusbar")
-local action    = require("ltui/action")
 
 -- define module
 local application = application or program()
@@ -86,15 +85,7 @@ end
 
 -- on event
 function application:on_event(e)
-    if (not program.on_event(self, e)) and curses.KEY_MOUSE then
-
-        -- mouse events
-        if e.type == event.ev_mouse and (
-                e.btn_name == "BUTTON1_CLICKED" or
-                e.btn_name == "BUTTON1_DOUBLE_CLICKED") then
-            self:action_on(action.ac_on_clicked, e.x, e.y)
-        end
-    end
+    program.on_event(self, e)
 end
 
 -- on resize

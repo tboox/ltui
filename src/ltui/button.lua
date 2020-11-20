@@ -41,28 +41,16 @@ function button:init(name, bounds, text, on_action)
     -- show cursor
     self:cursor_show(true)
 
-    -- init action
+    -- init actions
     self:action_set(action.ac_on_enter, on_action)
-
-    if curses.KEY_MOUSE then
-
-        -- mark as mouseable
-        self:option_set("mouseable", true)
-
-        -- set click action
-        self:action_set(action.ac_on_clicked, function (v)
-
-            -- return if not mouseable
-            if not v:option("mouseable") then
-                return
-            end
-
-            if v:parent()._do_select then
-                return v:parent():_do_select()
-            end
-            return v:action_on(action.ac_on_enter)
-        end)
-    end
+    self:action_set(action.ac_on_clicked, function (v)
+        -- FIXME
+        if v:parent()._do_select then
+            v:parent():_do_select()
+        end
+        v:action_on(action.ac_on_enter)
+        return true
+    end)
 end
 
 -- draw button

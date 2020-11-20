@@ -25,6 +25,7 @@ local point   = require("ltui/point")
 local panel   = require("ltui/panel")
 local event   = require("ltui/event")
 local curses  = require("ltui/curses")
+local action  = require("ltui/action")
 
 -- define module
 local program = program or panel()
@@ -187,6 +188,11 @@ function program:on_event(e)
     elseif event.is_command(e, "cm_exit") then
         self:quit()
         return true
+    -- mouse events
+    elseif e.type == event.ev_mouse and self:option("mouseable") then
+        if e.btn_name == "BUTTON1_CLICKED" or e.btn_name == "BUTTON1_DOUBLE_CLICKED" then
+            self:action_on(action.ac_on_clicked, e.x, e.y)
+        end
     end
 end
 

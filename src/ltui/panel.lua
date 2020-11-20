@@ -49,40 +49,30 @@ function panel:init(name, bounds)
     -- init views cache
     self._VIEWS_CACHE = {}
 
-    if curses.KEY_MOUSE then
+    -- on click action
+    self:action_set(action.ac_on_clicked, function (v, x, y)
 
-        -- mark as mouseable
-        self:option_set("mouseable", true)
+        -- get relative coordinates
+        x, y = x - v:bounds().sx, y - v:bounds().sy
 
-        -- set click action
-        self:action_set(action.ac_on_clicked, function (v, x, y)
+        -- try focused first
+        local current = v:current()
+        if current and current:option("mouseable") and current:bounds():contains(x, y) then
+            return current:action_on(action.ac_on_clicked, x, y)
+        end
 
-            -- return if not clickable
-            if not v:option("mouseable") then
-                return
-            end
-
-            -- get relative coordinates
-            x, y = x - v:bounds().sx, y - v:bounds().sy
-
-            -- try focused first
-            if v:current() and v:current():bounds():contains(x, y) then
-                return v:current():action_on(action.ac_on_clicked, x, y)
-            end
-
-            local p = v:last()
-            while p do
-                if p:option('selectable') and p:bounds():contains(x, y) then
-                    v:select(p)
-                    return p:action_on(action.ac_on_clicked, x, y)
+        local p = v:last()
+        while p do
+            if p:option('selectable') and p:bounds():contains(x, y) then
+                v:select(p)
+                if p:option("mouseable") then
+                    p:action_on(action.ac_on_clicked, x, y)
                 end
-                p = v:prev(p)
+                return true
             end
-
-            -- return true if does not match any selectable view
-            return true
-        end)
-    end
+            p = v:prev(p)
+        end
+    end)
 end
 
 -- get all child views
