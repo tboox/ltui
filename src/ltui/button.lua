@@ -45,10 +45,6 @@ function button:init(name, bounds, text, on_action)
     self:option_set("mouseable", true)
     self:action_set(action.ac_on_enter, on_action)
     self:action_set(action.ac_on_clicked, function (v)
-        -- FIXME
-        if v:parent()._do_select then
-            v:parent():_do_select()
-        end
         v:action_on(action.ac_on_enter)
         return true
     end)
