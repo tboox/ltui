@@ -23,7 +23,7 @@ local string = string or {}
 
 -- match the start string
 function string:startswith(str)
-    return self:find('^' .. str) ~= nil
+    return self:find(str, 1, true) == 1
 end
 
 -- find the last substring with the given pattern
