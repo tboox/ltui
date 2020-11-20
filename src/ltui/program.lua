@@ -46,7 +46,7 @@ function program:init(name, argv)
     curses.nl(false)
 
     -- init mouse support
-    if curses.KEY_MOUSE then
+    if curses.has_mouse() then
         -- curses.ALL_MOUSE_EVENTS may be set to mask unused events
         curses.mousemask(curses.ALL_MOUSE_EVENTS)
     end
