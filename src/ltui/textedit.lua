@@ -26,6 +26,7 @@ local event     = require("ltui/event")
 local border    = require("ltui/border")
 local curses    = require("ltui/curses")
 local textarea  = require("ltui/textarea")
+local action    = require("ltui/action")
 
 -- define module
 local textedit = textedit or textarea()
@@ -41,6 +42,10 @@ function textedit:init(name, bounds, text)
 
     -- mark as selectable
     self:option_set("selectable", true)
+
+    -- mark as mouseable
+    self:option_set("mouseable", true)
+    self:action_set(action.ac_on_clicked, function () return true end)
 
     -- disable progress
     self:option_set("progress", false)
