@@ -24,6 +24,8 @@ local view      = require("ltui/view")
 local label     = require("ltui/label")
 local event     = require("ltui/event")
 local curses    = require("ltui/curses")
+local action    = require("ltui/action")
+local scrollbar = require("ltui/scrollbar")
 
 -- define module
 local textarea = textarea or label()
@@ -37,8 +39,8 @@ function textarea:init(name, bounds, text)
     -- mark as selectable
     self:option_set("selectable", true)
 
-    -- enable progress
-    self:option_set("progress", true)
+    -- mark as scrollable
+    self:option_set("scrollable", true)
 
     -- init start line
     self._STARTLINE = 0
@@ -60,8 +62,8 @@ function textarea:on_draw(transparent)
         self:canvas():attr(textattr):move(0, 0):putstrs(strs, self._STARTLINE + 1)
     end
 
-    -- draw progress
-    if self:option("progress") then
+    -- draw scrollable
+    if self:option("scrollable") then
         local tb = self._STARTLINE
         local fator = self:height() / self._LINECOUNT
         local sb = math.min(math.floor(tb * fator), self:height() - 1)

@@ -40,7 +40,7 @@ function boxdialog:init(name, bounds, title)
     self:text():bounds().ey = self._TEXT_EY
     self:text():invalidate(true)
     self:text():option_set("selectable", false)
-    self:text():option_set("progress", false)
+    self:text():option_set("scrollable", false)
 
     -- insert box
     self:panel():insert(self:box())
