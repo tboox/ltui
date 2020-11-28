@@ -69,7 +69,7 @@ function demo:init()
     table.insert(configs, menuconf.number {value = 6, default = 10, description = "number config item"})
     table.insert(configs, menuconf.string {value = "x86_64", description = "string config item"})
     table.insert(configs, menuconf.menu {description = "menu config item", configs = configs_sub})
-    table.insert(configs, menuconf.choice {value = 3, values = {1, 5, 6, 7}, default = 2, description = "choice config item"})
+    table.insert(configs, menuconf.choice {value = 3, values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16}, default = 2, description = "choice config item"})
 
     -- init menu config dialog
     self:dialog_mconf():load(configs)
