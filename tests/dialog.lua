@@ -86,6 +86,7 @@ function demo:dialog_help()
             dialog_help:text():text_set(helptext)
         end
         dialog_help:button_add("exit", "< Exit >", function (v) self:remove(dialog_help) end)
+        dialog_help:option_set("scrollable", true)
         self._DIALOG_HELP = dialog_help
     end
     return dialog_help

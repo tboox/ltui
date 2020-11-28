@@ -47,9 +47,6 @@ function textedit:init(name, bounds, text)
     self:option_set("mouseable", true)
     self:action_set(action.ac_on_clicked, function () return true end)
 
-    -- disable scrollbar
-    self:option_set("scrollable", false)
-
     -- enable multiple line
     self:option_set("multiline", true)
 end

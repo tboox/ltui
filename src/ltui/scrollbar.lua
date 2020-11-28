@@ -35,7 +35,7 @@ function scrollbar:init(name, bounds, vertical)
     view.init(self, name, bounds)
 
     -- init bar attribute
-    self:charattr_set("black")
+    self:charattr_set("black on black")
 
     -- init bar vertical
     self:vertical_set(vertical)
@@ -165,14 +165,18 @@ function scrollbar:on_draw(transparent)
     if self:vertical() then
         local sb = math.floor(self:height() * pb)
         local se = math.ceil(self:height() * pe)
-        if se > sb and se - sb < self:height() then
-            self:canvas():attr(charattr):move(0, sb):putchar(char, se - sb, true)
+        if se > sb and se - sb <= self:height() then
+            for x = 0, self:width() - 1 do
+                self:canvas():attr(charattr):move(x, sb):putchar(char, se - sb, true)
+            end
         end
     else
         local sb = math.floor(self:width() * pb)
         local se = math.ceil(self:width() * pe)
-        if se > sb and se - sb < self:width() then
-            self:canvas():attr(charattr):move(sb, 0):putchar(char, se - sb)
+        if se > sb and se - sb <= self:width() then
+            for y = 0, self:height() - 1 do
+                self:canvas():attr(charattr):move(sb, y):putchar(char, se - sb)
+            end
         end
     end
 end

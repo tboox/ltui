@@ -122,6 +122,7 @@ function mconfdialog:helpdialog()
     if not self._HELPDIALOG then
         local helpdialog = textdialog:new("mconfdialog.help", self:bounds(), "help")
         helpdialog:button_add("exit", "< Exit >", function (v) helpdialog:quit() end)
+        helpdialog:option_set("scrollable", true)
         self._HELPDIALOG = helpdialog
     end
     return self._HELPDIALOG
@@ -132,6 +133,7 @@ function mconfdialog:resultdialog()
     if not self._RESULTDIALOG then
         local resultdialog = textdialog:new("mconfdialog.result", self:bounds(), "result")
         resultdialog:button_add("exit", "< Exit >", function (v) resultdialog:quit() end)
+        resultdialog:option_set("scrollable", true)
         self._RESULTDIALOG = resultdialog
     end
     return self._RESULTDIALOG
