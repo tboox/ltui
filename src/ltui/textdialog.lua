@@ -58,6 +58,11 @@ function textdialog:init(name, bounds, title)
             self:text():bounds_set(rect:new(0, 0, v:width(), v:height() - 1))
         end
     end)
+
+    -- on scroll for text and scrollbar
+    self:text():action_set(action.ac_on_scrolled, function (v, progress)
+        self:scrollbar():progress_set(progress)
+    end)
 end
 
 -- enable or disable scrollbar

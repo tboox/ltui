@@ -149,30 +149,30 @@ function scrollbar:on_draw(transparent)
     -- draw background
     view.on_draw(self, transparent)
 
-    -- compute bar range
+    -- draw bar
     local char      = self:char()
     local charattr  = self:charattr_val()
-    local progress  = self:progress()
-    local stepwidth = self:stepwidth()
-    local pb = progress
-    local pe = progress + stepwidth
-    if pe > 1 then
-        pb = 1 - stepwidth
-        pe = 1
-    end
-
-    -- draw bar
     if self:vertical() then
-        local sb = math.floor(self:height() * pb)
-        local se = math.ceil(self:height() * pe)
+        local sn = math.ceil(self:height() * self:stepwidth())
+        local sb = math.floor(self:height() * self:progress())
+        local se = sb + sn
+        if se > self:height() then
+            sb = self:height() - sn
+            se = self:height()
+        end
         if se > sb and se - sb <= self:height() then
             for x = 0, self:width() - 1 do
                 self:canvas():attr(charattr):move(x, sb):putchar(char, se - sb, true)
             end
         end
     else
-        local sb = math.floor(self:width() * pb)
-        local se = math.ceil(self:width() * pe)
+        local sn = math.ceil(self:width() * self:stepwidth())
+        local sb = math.floor(self:width() * self:progress())
+        local se = sb + sn
+        if se > self:width() then
+            sb = self:width() - sn
+            se = self:width()
+        end
         if se > sb and se - sb <= self:width() then
             for y = 0, self:height() - 1 do
                 self:canvas():attr(charattr):move(sb, y):putchar(char, se - sb)
