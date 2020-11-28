@@ -51,7 +51,12 @@ function textdialog:init(name, bounds, title)
 
     -- on resize for panel
     self:panel():action_add(action.ac_on_resized, function (v)
-        self:text():bounds_set(rect:new(0, 0, v:width(), v:height() - 1))
+        if self:option("scrollable") then
+            self:text():bounds_set(rect:new(0, 0, v:width() - 1, v:height() - 1))
+            self:scrollbar():bounds_set(rect:new(v:width() - 1, 0, 1, v:height() - 1))
+        else
+            self:text():bounds_set(rect:new(0, 0, v:width(), v:height() - 1))
+        end
     end)
 end
 
