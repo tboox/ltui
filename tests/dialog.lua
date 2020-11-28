@@ -76,6 +76,7 @@ function demo:dialog_help()
     local dialog_help = self._DIALOG_HELP
     if not dialog_help then
         dialog_help = textdialog:new("dialog.help", rect {1, 1, self:width() - 1, self:height() - 1}, "README")
+        dialog_help:option_set("scrollable", true)
         local helptext = nil
         local file = io.open("./LICENSE.md", 'r')
         if file then
@@ -86,7 +87,6 @@ function demo:dialog_help()
             dialog_help:text():text_set(helptext)
         end
         dialog_help:button_add("exit", "< Exit >", function (v) self:remove(dialog_help) end)
-        dialog_help:option_set("scrollable", true)
         self._DIALOG_HELP = dialog_help
     end
     return dialog_help

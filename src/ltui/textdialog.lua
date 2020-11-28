@@ -59,9 +59,22 @@ function textdialog:init(name, bounds, title)
         end
     end)
 
+    -- show scrollbar?
+    self:text():action_set(action.ac_on_text_changed, function (v)
+        if self:option("scrollable") then
+            if v:scrollable() then
+                self:scrollbar():show(true)
+            else
+                self:scrollbar():show(false)
+            end
+        end
+    end)
+
     -- on scroll for text and scrollbar
     self:text():action_set(action.ac_on_scrolled, function (v, progress)
-        self:scrollbar():progress_set(progress)
+        if self:option("scrollable") then
+            self:scrollbar():progress_set(progress)
+        end
     end)
 end
 
@@ -72,12 +85,9 @@ function textdialog:option_set(name, value)
         if value ~= oldvalue then
             if value then
                 self:text():bounds():resize(self:panel():width() - 1, self:panel():height() - 1)
-                self:scrollbar():show(true)
             else
                 self:text():bounds():resize(self:panel():width(), self:panel():height() - 1)
-                self:scrollbar():show(false)
             end
-            self:invalidate()
         end
     end
     dialog.option_set(self, name, value)

@@ -67,9 +67,14 @@ function textarea:text_set(text)
     return label.text_set(self, text)
 end
 
+-- is scrollable?
+function textarea:scrollable()
+    return self._LINECOUNT > self:height()
+end
+
 -- scroll
 function textarea:scroll(lines)
-    if self._LINECOUNT > self:height() then
+    if self:scrollable() then
         self._STARTLINE = self._STARTLINE + lines
         if self._STARTLINE < 0 then
             self._STARTLINE = 0
@@ -85,7 +90,7 @@ end
 
 -- scroll to end
 function textarea:scroll_to_end()
-    if self._LINECOUNT > self:height() then
+    if self:scrollable() then
         local startline_end = self._LINECOUNT - self:height()
         self._STARTLINE = startline_end
         self:action_on(action.ac_on_scrolled, self._STARTLINE / startline_end)
