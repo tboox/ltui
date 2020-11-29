@@ -117,8 +117,6 @@ end
 
 -- on event
 function choicebox:on_event(e)
-
-    -- select config
     if e.type == event.ev_keyboard then
         if e.key_name == "Down" then
             if self:current() == self:last() then
