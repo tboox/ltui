@@ -72,7 +72,7 @@ function textdialog:init(name, bounds, title)
 
     -- on scroll for text and scrollbar
     self:text():action_set(action.ac_on_scrolled, function (v, progress)
-        if self:option("scrollable") then
+        if self:scrollbar():state("visible") then
             self:scrollbar():progress_set(progress)
         end
     end)

@@ -25,6 +25,7 @@ local event       = require("ltui/event")
 local action      = require("ltui/action")
 local curses      = require("ltui/curses")
 local window      = require("ltui/window")
+local scrollbar   = require("ltui/scrollbar")
 local choicebox   = require("ltui/choicebox")
 local boxdialog   = require("ltui/boxdialog")
 
@@ -50,21 +51,55 @@ function choicedialog:init(name, bounds, title)
     end)
     self:buttons():select(self:button("select"))
 
+    -- insert scrollbar
+    self:box():panel():insert(self:scrollbar_box())
+
     -- insert choice box
     self:box():panel():insert(self:choicebox())
 
     -- disable to select to box (disable Tab switch and only response to buttons)
     self:box():option_set("selectable", false)
+
+    -- on resize for panel
+    self:box():panel():action_add(action.ac_on_resized, function (v)
+        self:choicebox():bounds_set(rect:new(0, 0, v:width() - 1, v:height()))
+        self:scrollbar_box():bounds_set(rect:new(v:width() - 1, 0, 1, v:height()))
+    end)
+
+    -- show scrollbar?
+    self:choicebox():action_set(action.ac_on_load, function (v)
+        if v:scrollable() then
+            self:scrollbar_box():show(true)
+        else
+            self:scrollbar_box():show(false)
+        end
+    end)
+
+    -- on scroll
+    self:choicebox():action_set(action.ac_on_scrolled, function (v, progress)
+        if self:scrollbar_box():state("visible") then
+            self:scrollbar_box():progress_set(progress)
+        end
+    end)
 end
 
 -- get choice box
 function choicedialog:choicebox()
     if not self._CHOICEBOX then
         local bounds = self:box():panel():bounds()
-        self._CHOICEBOX = choicebox:new("choicedialog.choicebox", rect:new(0, 0, bounds:width(), bounds:height()))
+        self._CHOICEBOX = choicebox:new("choicedialog.choicebox", rect:new(0, 0, bounds:width() - 1, bounds:height()))
         self._CHOICEBOX:state_set("focused", true) -- we can select and highlight selected item
     end
     return self._CHOICEBOX
+end
+
+-- get box scrollbar
+function choicedialog:scrollbar_box()
+    if not self._SCROLLBAR_BOX then
+        self._SCROLLBAR_BOX = scrollbar:new("choicedialog.scrollbar", rect:new(self:box():panel():width() - 1, 0, 1, self:box():panel():height()))
+        self._SCROLLBAR_BOX:show(false)
+    end
+    return self._SCROLLBAR_BOX
 end
 
 -- on event

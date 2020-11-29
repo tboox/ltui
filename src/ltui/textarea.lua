@@ -79,7 +79,7 @@ function textarea:scroll(lines)
         if self._STARTLINE < 0 then
             self._STARTLINE = 0
         end
-        local startline_end = self._LINECOUNT - self:height()
+        local startline_end = self._LINECOUNT > self:height() and self._LINECOUNT - self:height() or self._LINECOUNT
         if self._STARTLINE > startline_end then
             self._STARTLINE = startline_end
         end
@@ -91,7 +91,7 @@ end
 -- scroll to end
 function textarea:scroll_to_end()
     if self:scrollable() then
-        local startline_end = self._LINECOUNT - self:height()
+        local startline_end = self._LINECOUNT > self:height() and self._LINECOUNT - self:height() or self._LINECOUNT
         self._STARTLINE = startline_end
         self:action_on(action.ac_on_scrolled, self._STARTLINE / startline_end)
         self:invalidate()
