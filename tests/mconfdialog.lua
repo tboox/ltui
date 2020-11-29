@@ -60,6 +60,27 @@ function demo:init()
     table.insert(configs_sub, menuconf.menu {description = "menu config sub-item", configs = configs_sub2})
     table.insert(configs_sub, menuconf.choice {value = 2, values = {2, 5, 16, 87}, description = "choice config sub-item"})
 
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item1"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item2"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item3"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item4"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item5"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item6"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item7"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item8"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item9"})
+
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item10"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item11"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item12"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item13"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item14"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item15"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item16"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item17"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item18"})
+    table.insert(configs_sub, menuconf.number {value = 6, default = 10, description = "number config item19"})
+
     local configs = {}
     table.insert(configs, menuconf.boolean {description = "boolean config item"})
     table.insert(configs, menuconf.boolean {default = true, new = false, description = {"boolean config item2",
