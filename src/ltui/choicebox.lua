@@ -60,7 +60,7 @@ function choicebox:load(values, selected)
 
     -- insert top-n items
     local startindex = self._STARTINDEX
-    for idx = startindex, startindex + self:height() do
+    for idx = startindex, startindex + self:height() - 1 do
         local item = items[idx]
         if item then
             self:insert(item)
@@ -97,7 +97,7 @@ function choicebox:scroll(count)
         end
         self._STARTINDEX = startindex
         self:clear()
-        for idx = startindex, startindex + self:height() do
+        for idx = startindex, startindex + self:height() - 1 do
             local item = items[idx]
             if item then
                 item:bounds():move2(0, idx - startindex)
@@ -115,21 +115,46 @@ function choicebox:scroll(count)
     end
 end
 
+-- on resize
+function choicebox:on_resize()
+    local items = self:_items()
+    local totalcount = #items
+    local startindex = self._STARTINDEX
+    for idx = 1, totalcount do
+        local item = items[idx]
+        if item then
+            if idx >= startindex and idx < startindex + self:height() then
+                if not self:view(item:name()) then
+                    item:bounds():move2(0, idx - startindex)
+                    self:insert(item)
+                end
+            else
+                if self:view(item:name()) then
+                    self:remove(item)
+                end
+            end
+        end
+    end
+    panel.on_resize(self)
+end
+
 -- on event
 function choicebox:on_event(e)
     if e.type == event.ev_keyboard then
         if e.key_name == "Down" then
             if self:current() == self:last() then
                 self:scroll(self:height())
+            else
+                self:select_next()
             end
-            self:select_next()
             self:_notify_scrolled()
             return true
         elseif e.key_name == "Up" then
             if self:current() == self:first() then
                 self:scroll(-self:height())
+            else
+                self:select_prev()
             end
-            self:select_prev()
             self:_notify_scrolled()
             return true
         elseif e.key_name == "Enter" or e.key_name == " " then
