@@ -72,11 +72,11 @@ function choicebox:load(values, selected)
     -- select the first item
     self:select(self:first())
 
-    -- invalidate
-    self:invalidate()
-
     -- on loaded
     self:action_on(action.ac_on_load)
+
+    -- invalidate
+    self:invalidate()
 end
 
 -- is scrollable?

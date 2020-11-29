@@ -60,7 +60,7 @@ function textdialog:init(name, bounds, title)
     end)
 
     -- show scrollbar?
-    self:text():action_set(action.ac_on_text_changed, function (v)
+    self:text():action_add(action.ac_on_text_changed, function (v)
         if self:option("scrollable") then
             if v:scrollable() then
                 self:scrollbar():show(true)
@@ -71,7 +71,7 @@ function textdialog:init(name, bounds, title)
     end)
 
     -- on scroll for text and scrollbar
-    self:text():action_set(action.ac_on_scrolled, function (v, progress)
+    self:text():action_add(action.ac_on_scrolled, function (v, progress)
         if self:scrollbar():state("visible") then
             self:scrollbar():progress_set(progress)
         end

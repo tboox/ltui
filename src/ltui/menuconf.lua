@@ -40,18 +40,132 @@ function menuconf:init(name, bounds)
 
     -- init configs
     self._CONFIGS = {}
+
+    -- init items
+    self._ITEMS = {}
+
+    -- init start index
+    self._STARTINDEX = 1
+
+    -- on resize for panel
+    self:action_add(action.ac_on_resized, function (v)
+        local items = self:_items()
+        local totalcount = #items
+        local startindex = self._STARTINDEX
+        self:clear()
+        for idx = startindex, startindex + self:height() do
+            local item = items[idx]
+            if item then
+                item:bounds():move2(0, idx - startindex)
+                self:insert(item)
+            else
+                break
+            end
+        end
+        self:select(self:first())
+        self:invalidate()
+    end)
+end
+
+-- load configs
+function menuconf:load(configs)
+
+    -- clear the views first
+    self:clear()
+
+    -- detach the previous config and view
+    local configs_prev = self._CONFIGS._PREV
+    if configs_prev then
+        for _, config in ipairs(configs_prev) do
+            config._view = nil
+        end
+    end
+
+    -- save configs
+    self._CONFIGS = configs
+
+    -- load items
+    local items = {}
+    for idx, config in ipairs(configs) do
+        table.insert(items, self:_load_item(config, idx))
+    end
+    self._ITEMS = items
+
+    -- insert top-n items
+    local startindex = self._STARTINDEX
+    for idx = startindex, startindex + self:height() do
+        local item = items[idx]
+        if item then
+            self:insert(item)
+        else
+            break
+        end
+    end
+
+    -- select the first item
+    self:select(self:first())
+
+    -- on loaded
+    self:action_on(action.ac_on_load)
+
+    -- invalidate
+    self:invalidate()
+end
+
+-- is scrollable?
+function menuconf:scrollable()
+    return #self:_items() > self:height()
+end
+
+-- scroll
+function menuconf:scroll(count)
+    if self:scrollable() then
+        local items = self:_items()
+        local totalcount = #items
+        local startindex = self._STARTINDEX + count
+        if startindex > totalcount then
+            return
+        elseif startindex < 1 then
+            startindex = 1
+        end
+        self._STARTINDEX = startindex
+        self:clear()
+        for idx = startindex, startindex + self:height() do
+            local item = items[idx]
+            if item then
+                item:bounds():move2(0, idx - startindex)
+                self:insert(item)
+            else
+                break
+            end
+        end
+        if count > 0 then
+            self:select(self:first())
+        else
+            self:select(self:last())
+        end
+        self:invalidate()
+    end
 end
 
 -- on event
 function menuconf:on_event(e)
-
-    -- select config
     local back = false
     if e.type == event.ev_keyboard then
         if e.key_name == "Down" then
-            return self:select_next()
+            if self:current() == self:last() then
+                self:scroll(self:height())
+            end
+            self:select_next()
+            self:_notify_scrolled()
+            return true
         elseif e.key_name == "Up" then
-            return self:select_prev()
+            if self:current() == self:first() then
+                self:scroll(-self:height())
+            end
+            self:select_prev()
+            self:_notify_scrolled()
+            return true
         elseif e.key_name == "Enter" or e.key_name == " " then
             self:_do_select()
             return true
@@ -85,54 +199,36 @@ function menuconf:on_event(e)
     end
 end
 
--- load configs
-function menuconf:load(configs)
-
-    -- clear the views first
-    self:clear()
-
-    -- detach the previous config and view
-    local configs_prev = self._CONFIGS._PREV
-    if configs_prev then
-        for _, config in ipairs(configs_prev) do
-            config._view = nil
-        end
-    end
-
-    -- insert configs
-    self._CONFIGS = configs
-    for _, config in ipairs(configs) do
-        if self:count() < self:height() then
-            self:_do_insert(config)
-        end
-    end
-
-    -- select the first item
-    self:select(self:first())
-
-    -- invalidate
-    self:invalidate()
-end
-
--- do insert a config item
-function menuconf:_do_insert(config)
+-- load a config item
+function menuconf:_load_item(config, index)
 
     -- init a config item view
-    local item = button:new("menuconf.config." .. self:count(),
-                    rect:new(0, self:count(), self:width(), 1),
+    local item = button:new("menuconf.config." .. index,
+                    rect:new(0, index - 1, self:width(), 1),
                     tostring(config),
                     function (v, e)
                         self:_do_select()
                     end)
 
-    -- attach this config
+    -- attach this index and config
+    item:extra_set("index", index)
     item:extra_set("config", config)
 
     -- attach this view
     config._view = item
+    return item
+end
 
-    -- insert this config item
-    self:insert(item)
+-- notify scrolled
+function menuconf:_notify_scrolled()
+    local totalcount = #self:_items()
+    local startindex = self:current():extra("index")
+    self:action_on(action.ac_on_scrolled, startindex / totalcount)
+end
+
+-- get all items
+function menuconf:_items()
+    return self._ITEMS
 end
 
 -- do select the current config
