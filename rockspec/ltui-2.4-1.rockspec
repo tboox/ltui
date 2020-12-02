@@ -59,6 +59,7 @@ build = {
             ["ltui.point"] = "src/ltui/point.lua",
             ["ltui.program"] = "src/ltui/program.lua",
             ["ltui.rect"] = "src/ltui/rect.lua",
+            ["ltui.scrollbar"] = "src/ltui/scrollbar.lua",
             ["ltui.statusbar"] = "src/ltui/statusbar.lua",
             ["ltui.textarea"] = "src/ltui/textarea.lua",
             ["ltui.textdialog"] = "src/ltui/textdialog.lua",
