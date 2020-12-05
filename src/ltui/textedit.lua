@@ -77,10 +77,7 @@ function textedit:on_event(e)
 
     -- update text
     if e.type == event.ev_keyboard then
-        if e.key_code > 0x1f and e.key_code < 0x100 then
-            self:text_set(self:text() .. string.char(e.key_code))
-            return true
-        elseif e.key_name == "Enter" and self:option("multiline") then
+        if e.key_name == "Enter" and self:option("multiline") then
             self:text_set(self:text() .. '\n')
             return true
         elseif e.key_name == "Backspace" then
@@ -99,6 +96,9 @@ function textedit:on_event(e)
             if pastetext then
                 self:text_set(self:text() .. pastetext)
             end
+            return true
+        elseif e.key_code > 0x1f and e.key_code < 0x100 then
+            self:text_set(self:text() .. string.char(e.key_code))
             return true
         end
     end
