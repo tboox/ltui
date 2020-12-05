@@ -88,7 +88,7 @@ function textedit:on_event(e)
             if #text > 0 then
                 local size = 1
                 -- while continuation byte
-                while (text:byte(#text - size) & 0xc0) == 0x80 do
+                while (text:byte(#text - size + 1) & 0xc0) == 0x80 do
                     size = size + 1
                 end
                 self:text_set(text:sub(1, #text - size))
