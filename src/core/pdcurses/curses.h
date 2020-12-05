@@ -35,6 +35,7 @@ PDCurses portable platform definitions list:
 #define SYSVcurses      1      /* System V Curses routines */
 #define BSDcurses       1      /* BSD Curses routines */
 #define CHTYPE_LONG     1      /* size of chtype; long */
+#define PDC_WIDE        1      /* wide-character support.*/
 #ifndef NOMOUSE
 #define NCURSES_MOUSE_VERSION   2   /* Use ncurses style mouse API */
 #endif
