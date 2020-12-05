@@ -97,7 +97,7 @@ function textedit:on_event(e)
                 self:text_set(self:text() .. pastetext)
             end
             return true
-        elseif e.key_code > 0x1f and e.key_code < 0x100 then
+        elseif e.key_code > 0x1f and e.key_code < 0xf8 then
             self:text_set(self:text() .. string.char(e.key_code))
             return true
         end
