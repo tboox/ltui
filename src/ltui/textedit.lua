@@ -19,14 +19,18 @@
 --
 
 -- load modules
-local log       = require("ltui/base/log")
-local view      = require("ltui/view")
-local label     = require("ltui/label")
-local event     = require("ltui/event")
-local border    = require("ltui/border")
-local curses    = require("ltui/curses")
-local textarea  = require("ltui/textarea")
-local action    = require("ltui/action")
+local log         = require("ltui/base/log")
+local view        = require("ltui/view")
+local label       = require("ltui/label")
+local event       = require("ltui/event")
+local border      = require("ltui/border")
+local curses      = require("ltui/curses")
+local textarea    = require("ltui/textarea")
+local action      = require("ltui/action")
+local luajit, bit = pcall(require, "bit")
+if not luajit then
+    bit = require("ltui/base/bit")
+end
 
 -- define module
 local textedit = textedit or textarea()
@@ -85,7 +89,7 @@ function textedit:on_event(e)
             if #text > 0 then
                 local size = 1
                 -- while continuation byte
-                while (text:byte(#text - size + 1) & 0xc0) == 0x80 do
+                while bit.band(text:byte(#text - size + 1), 0xc0) == 0x80 do
                     size = size + 1
                 end
                 self:text_set(text:sub(1, #text - size))
