@@ -33,6 +33,7 @@ build = {
             ["ltui"] = "src/ltui.lua",
             ["ltui.action"] = "src/ltui/action.lua",
             ["ltui.application"] = "src/ltui/application.lua",
+            ["ltui.base.bit"] = "src/ltui/base/bit.lua",
             ["ltui.base.dlist"] = "src/ltui/base/dlist.lua",
             ["ltui.base.log"] = "src/ltui/base/log.lua",
             ["ltui.base.os"] = "src/ltui/base/os.lua",
