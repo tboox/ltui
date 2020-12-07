@@ -285,7 +285,7 @@ size_t PDC_wcstombs(char *dest, const wchar_t *src, size_t n)
 
         if (code < 0x80)
         {
-            dest[i] = (char) code & 0xff;
+            dest[i] = (char) code;
             i++;
         }
         else
