@@ -218,6 +218,11 @@ function string.ipattern(pattern, brackets)
     return table.concat(tmp)
 end
 
+-- ensure unsigned byte
+function string:wcbyte(idx)
+    return self:byte(idx) >= 0 and self:byte(idx) or (0x80 - self:byte(idx))
+end
+
 -- unicode width
 function string:wcwidth(idx)
 
@@ -277,13 +282,13 @@ function string:wcwidth(idx)
     idx = idx or 1
 
     -- turn codepoint into unicode
-    local c = self:byte(idx)
+    local c = self:wcbyte(idx)
     local seq = c < 0x80 and 1 or c < 0xE0 and 2 or c < 0xF0 and 3 or
                 c < 0xF8 and 4 or error("invalid UTF-8 sequence")
     local val = seq == 1 and c or bit.band(c, (2^(8 - seq) - 1))
 
     for aux = 2, seq do
-        c = self:byte(idx + aux - 1)
+        c = self:wcbyte(idx + aux - 1)
         val = val * 2 ^ 6 + bit.band(c, 0x3F)
     end
 
