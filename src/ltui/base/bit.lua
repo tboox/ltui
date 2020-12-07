@@ -31,5 +31,10 @@ function bit.bor(a, b)
     return a | b
 end
 
+-- bit/xor operation
+function bit.bxor(a, b)
+    return a ~ b
+end
+
 -- load bit module
 return bit
