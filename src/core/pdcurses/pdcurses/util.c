@@ -70,7 +70,7 @@ util
     delay_output                Y       Y       Y
     getcchar                    Y
     setcchar                    Y
-    wunctrl                     Yhttps://github.com/laelnasan/ltui/blame/pdc-wide/src/core/pdcurses/pdcurses/util.c
+    wunctrl                     Y
     PDC_mbtowc                  -       -       -
     PDC_mbstowcs                -       -       -
     PDC_wcstombs                -       -       -
