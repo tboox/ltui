@@ -284,7 +284,7 @@ function string:wcwidth(idx)
 
     for aux = 2, seq do
         c = self:byte(idx + aux - 1)
-        val = val * 2 ^ 6 + bit.band(c, 0x3F)
+        val = bit.bor(val * 2 ^ 6, bit.band(c, 0x3F))
     end
 
     -- test for 8-bit control characters
