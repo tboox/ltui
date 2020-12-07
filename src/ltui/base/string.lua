@@ -333,12 +333,12 @@ function string:wcswidth(idx)
     idx = idx or 1
     while idx <= #self do
         if bit.band(self:byte(idx), 0xc0) ~= 0x80 then
-            size = size + self:wcwidth(idx)
+            width = width + self:wcwidth(idx)
         end
         idx = idx + 1
     end
 
-    return size
+    return width
 end
 
 -- return module: string
