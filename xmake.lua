@@ -117,7 +117,7 @@ target("ltui")
 
     -- add curses
     if is_plat("windows") then
-        add_defines("PDCURSES")
+        add_defines("PDCURSES", "PDC_WIDE", "PDC_FORCE_UTF8")
         add_includedirs("src/core/pdcurses")
     else
         add_packages("ncurses")
