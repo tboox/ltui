@@ -70,7 +70,7 @@ util
     delay_output                Y       Y       Y
     getcchar                    Y
     setcchar                    Y
-    wunctrl                     Y
+    wunctrl                     Yhttps://github.com/laelnasan/ltui/blame/pdc-wide/src/core/pdcurses/pdcurses/util.c
     PDC_mbtowc                  -       -       -
     PDC_mbstowcs                -       -       -
     PDC_wcstombs                -       -       -
@@ -285,21 +285,21 @@ size_t PDC_wcstombs(char *dest, const wchar_t *src, size_t n)
 
         if (code < 0x80)
         {
-            dest[i] = code;
+            dest[i] = (char) code & 0xff;
             i++;
         }
         else
             if (code < 0x800)
             {
-                dest[i] = ((code & 0x07c0) >> 6) | 0xc0;
-                dest[i + 1] = (code & 0x003f) | 0x80;
+                dest[i] = (char) ((code & 0x07c0) >> 6) | 0xc0;
+                dest[i + 1] = (char) (code & 0x003f) | 0x80;
                 i += 2;
             }
             else
             {
-                dest[i] = ((code & 0xf000) >> 12) | 0xe0;
-                dest[i + 1] = ((code & 0x0fc0) >> 6) | 0x80;
-                dest[i + 2] = (code & 0x003f) | 0x80;
+                dest[i] = (char) ((code & 0xf000) >> 12) | 0xe0;
+                dest[i + 1] = (char) ((code & 0x0fc0) >> 6) | 0x80;
+                dest[i + 2] = (char) (code & 0x003f) | 0x80;
                 i += 3;
             }
     }
