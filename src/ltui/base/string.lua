@@ -223,6 +223,11 @@ function string:wcbyte(idx)
     return self:byte(idx) >= 0 and self:byte(idx) or (0x80 - self:byte(idx))
 end
 
+-- is idx a continuation character?
+function string:wcis_cont(idx)
+    return self:byte(idx) < 0 and bit.band(-self:byte(idx), 0xc0) == 0x00 or bit.band(self:byte(idx), 0xc0) == 0x80
+end
+
 -- unicode width
 function string:wcwidth(idx)
 
@@ -335,14 +340,11 @@ end
 -- unicode string width
 function string:wcswidth(idx)
     local width = 0
-    idx = idx or 1
-    while idx <= #self do
-        if bit.band(self:byte(idx), 0xc0) ~= 0x80 then
-            width = width + self:wcwidth(idx)
+    for i = (idx or 1), #self do
+        if not self:wcis_cont(i) then
+            width = width + self:wcwidth(i)
         end
-        idx = idx + 1
     end
-
     return width
 end
 
