@@ -218,10 +218,7 @@ function string.ipattern(pattern, brackets)
     return table.concat(tmp)
 end
 
-
-
--- WC - wide caracter (utf8) support
-
+--- WC - wide caracter (utf8) support
 -- based on Markus Kuhn's implementation of wcswidth()
 -- https://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
 local _WCWIDTH_TABLE = {
@@ -283,52 +280,34 @@ local _WCWIDTH_TABLE = {
 
 for i = 1, #_WCWIDTH_TABLE - 1 do
     if not (_WCWIDTH_TABLE[i][2] < _WCWIDTH_TABLE[i + 1][1]) then
-        error("_WCWIDTH_TABLE inconsistency")
+        error("_WCWIDTH_TABLE inconsistency.")
     end
 end
 
-if ("\xff"):byte() < 0 then
-    -- ensure unsigned byte
-    function string:wcbyte(idx)
-        return self:byte(idx) >= 0 and self:byte(idx) or (0x80 - self:byte(idx))
-    end
-
-    -- is idx a continuation character?
-    function string:wcis_cont(idx)
-        return self:byte(idx) < 0 and bit.band(-self:byte(idx), 0xc0) == 0
-    end
-else
-    -- ensure unsigned byte
-    function string:wcbyte(idx)
-        return self:byte(idx)
-    end
-
-    -- is idx a continuation character?
-    function string:wcis_cont(idx)
-        return bit.band(self:byte(idx), 0xc0) == 0x80
-    end
-end
+-- is idx a continuation byte?
+function string:wcis_cont(idx) return bit.band(self:byte(idx), 0xc0) == 0x80 end
 
 function string:wcwidth(idx)
 
-    idx = idx or 1
-
     -- turn codepoint into unicode
-    local c = self:wcbyte(idx)
-    local seq = c < 0x80 and 1 or c < 0xE0 and 2 or c < 0xF0 and 3 or
-                c < 0xF8 and 4 or error("invalid UTF-8 sequence")
-    local val = seq == 1 and c or bit.band(c, (2^(8 - seq) - 1))
+    local val = self:byte(idx)
+    if val > 0x7f then
+        local cont_bytes = val < 0xE0 and 1 or val < 0xF0 and 2 or
+                           val < 0xF8 and 3 or error("invalid UTF-8 sequence")
+        val = bit.band(val, (2^(7 - cont_bytes) - 1))
 
-    for aux = 2, seq do
-        c = self:wcbyte(idx + aux - 1)
-        val = val * 2 ^ 6 + bit.band(c, 0x3F)
+        for aux = 1, cont_bytes do
+            val = val * 2 ^ 6 + bit.band(self:byte(idx + aux), 0x3F)
+        end
     end
 
     -- binary search in table of non-spacing characters
     local min, max = 1, #_WCWIDTH_TABLE
-    if val >= _WCWIDTH_TABLE[1][1] and val <= _WCWIDTH_TABLE[max][2] then
+    if val <= _WCWIDTH_TABLE[max][2] then
+
+        -- for application specific optimization
+        local mid = WCWIDTH_FEED_FOREWORD or math.floor((min + max) / 2)
         while max >= min do
-            local mid = math.floor((min + max) / 2)
             if val > _WCWIDTH_TABLE[mid][2] then
                 min = mid + 1
             elseif val < _WCWIDTH_TABLE[mid][1] then
@@ -336,13 +315,14 @@ function string:wcwidth(idx)
             else
                 return _WCWIDTH_TABLE[mid][3]
             end
+            mid = math.floor((min + max) / 2)
         end
     end
 
     return 1
 end
 
--- unicode string width
+-- unicode string width starting from index
 function string:wcswidth(idx)
     local width = 0
     for i = (idx or 1), #self do
