@@ -325,16 +325,16 @@ function string:wcwidth(idx)
     end
 
     -- binary search in table of non-spacing characters
-    local min, max = 1, #non_spacing
-    if val >= non_spacing[1][1] and val <= non_spacing[max][2] then
+    local min, max = 1, #_WCWIDTH_TABLE
+    if val >= _WCWIDTH_TABLE[1][1] and val <= _WCWIDTH_TABLE[max][2] then
         while max >= min do
             local mid = math.floor((min + max) / 2)
-            if val > non_spacing[mid][2] then
+            if val > _WCWIDTH_TABLE[mid][2] then
                 min = mid + 1
-            elseif val < non_spacing[mid][1] then
+            elseif val < _WCWIDTH_TABLE[mid][1] then
                 max = mid - 1
             else
-                return non_spacing[mid][3]
+                return _WCWIDTH_TABLE[mid][3]
             end
         end
     end
