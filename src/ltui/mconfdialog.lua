@@ -55,7 +55,7 @@ Pressing <Y> includes, <N> excludes. Enter <Esc> or <Back> to go back, <?> for H
     end)
     self:button_add("exit", "< Exit >", function (v, e)
         self:show_exit([[Did you wish to save your new configuration?
-Pressing <Esc> to continue your configuration.]])
+(Pressing <Esc> to continue your configuration.)]])
     end)
     self:button_add("help", "< Help >", function (v, e) self:show_help() end)
     self:button_add("save", "< Save >", function (v, e) self:action_on(action.ac_on_save) end)
@@ -268,7 +268,7 @@ end
 -- get exit dialog
 function mconfdialog:exitdialog()
     if not self._EXITDIALOG then
-        local exitdialog = textdialog:new("mconfdialog.exit", rect{0, 0, math.min(80, self:width() - 8), math.min(8, self:height())}, "")
+        local exitdialog = textdialog:new("mconfdialog.exit", rect{0, 0, math.min(60, self:width() - 8), math.min(7, self:height())}, "")
         exitdialog:background_set(self:frame():background())
         exitdialog:frame():background_set("cyan")
         exitdialog:button_add("Yes", "< Yes >", function (v)
