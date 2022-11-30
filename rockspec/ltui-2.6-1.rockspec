@@ -24,7 +24,7 @@ build = {
     type = "builtin",
     modules = {
         ["ltui"] = {
-            sources = "src/core/lcurses/lcurses.c",
+            sources = "src/core/curses/curses.c",
             libraries = {"curses"}
         }
     },

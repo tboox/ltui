@@ -1,5 +1,5 @@
 A cross-platform terminal ui library based on Lua
-Copyright 2015-2018 The TBOOX Open Source Group
+Copyright 2015-present The TBOOX Open Source Group
 
 This product includes software developed by The TBOOX Open Source Group (https://tboox.org/).
 
@@ -12,13 +12,4 @@ which can be obtained at:
     * Public Domain License
   * HOMEPAGE:
     * http://pdcurses.org/
-
-This product depends on 'lcurses/cui', Lua Console User Interface,
-which can be obtained at:
-
-  * LICENSE:
-    * core/src/lcurses/LICENSE (MIT License)
-  * HOMEPAGE:
-    * http://lua-cui.sourceforge.net/
-
 

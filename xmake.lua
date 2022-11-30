@@ -131,7 +131,7 @@ target("ltui")
     end
 
 -- add projects
-includes("src/core/lcurses")
+includes("src/core/curses")
 if is_plat("windows") then
     includes("src/core/pdcurses")
 end
