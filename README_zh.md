@@ -4,7 +4,7 @@
 
   <div>
     <a href="https://github.com/tboox/ltui/actions?query=workflow%3Abuild">
-      <img src="https://img.shields.io/github/workflow/status/tboox/ltui/build/master.svg?style=flat-square" alt="github-ci" />
+      <img src="https://img.shields.io/github/workflow/status/tboox/ltui/main.yml?branch=master&style=flat-square" alt="github-ci" />
     </a>
     <a href="https://github.com/tboox/ltui/releases">
       <img src="https://img.shields.io/github/release/tboox/ltui.svg?style=flat-square" alt="Github All Releases" />
