@@ -25,7 +25,7 @@ local rect   = require("ltui/rect")
 local event  = require("ltui/event")
 local point  = require("ltui/point")
 local curses = require("ltui/curses")
-local dlist  = require("ltui/base/dlist")
+local list   = require("ltui/base/list")
 local action = require("ltui/action")
 
 -- define module
@@ -44,7 +44,7 @@ function panel:init(name, bounds)
     self:option_set("selectable", true)
 
     -- init child views
-    self._VIEWS = dlist()
+    self._VIEWS = list()
 
     -- init views cache
     self._VIEWS_CACHE = {}

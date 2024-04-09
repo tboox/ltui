@@ -1,8 +1,8 @@
 package = "ltui"
-version = "2.7-1"
+version = "2.8-1"
 source = {
     url = "git://github.com/tboox/ltui",
-    tag = "v2.7"
+    tag = "v8.7"
 }
 description = {
     detailed = [[
@@ -34,7 +34,7 @@ build = {
             ["ltui.action"] = "src/ltui/action.lua",
             ["ltui.application"] = "src/ltui/application.lua",
             ["ltui.base.bit"] = "src/ltui/base/bit.lua",
-            ["ltui.base.dlist"] = "src/ltui/base/dlist.lua",
+            ["ltui.base.list"] = "src/ltui/base/list.lua",
             ["ltui.base.log"] = "src/ltui/base/log.lua",
             ["ltui.base.os"] = "src/ltui/base/os.lua",
             ["ltui.base.path"] = "src/ltui/base/path.lua",
