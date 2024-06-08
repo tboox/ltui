@@ -130,6 +130,10 @@ target("ltui")
         add_shflags("-undefined suppress")
     end
 
+    if is_plat("mingw") then
+        set_filename("ltui.dll")
+    end
+
 -- add projects
 includes("src/core/curses")
 if is_plat("windows") then
